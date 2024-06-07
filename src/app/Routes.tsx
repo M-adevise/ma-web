@@ -25,7 +25,7 @@ export const AppRoute = () => {
             </ThemedLayoutV2>
           </Authenticated>
         }>
-        <Route index element={<DashboardPage />} />
+        <Route index element={<Plan />} />
         <Route
           path='/patients'
           element={
@@ -34,13 +34,13 @@ export const AppRoute = () => {
             </HistoryList>
           }></Route>
 
-        <Route path='/profile' element={<Plan />} />
+        <Route path='/appointments' element={<DashboardPage />} />
       </Route>
 
       <Route
         element={
           <Authenticated key='auth-pages' fallback={<Outlet />}>
-            <NavigateToResource resource='appointments' />
+            <NavigateToResource resource='inbox' />
           </Authenticated>
         }>
         <Route

@@ -1,12 +1,20 @@
-import { Dashboard as DashboardIcon, History as HistoryIcon, Radio as RadioIcon, StarOutline } from '@mui/icons-material';
+import { CalendarMonth, Dashboard as DashboardIcon, Group, History as HistoryIcon, Inbox, Radio as RadioIcon, StarOutline } from '@mui/icons-material';
 
 export const appResources = [
   {
-    name: 'appointments',
+    name: 'inbox',
     list: '/',
     meta: {
+      label: 'Inbox',
+      icon: <Inbox />,
+    },
+  },
+  {
+    name: 'appointments',
+    list: '/appointments',
+    meta: {
       label: 'Appointments',
-      icon: <DashboardIcon />,
+      icon: <CalendarMonth />,
     },
   },
   {
@@ -14,15 +22,7 @@ export const appResources = [
     list: '/patients',
     meta: {
       label: 'Patients',
-      icon: <HistoryIcon />,
-    },
-  },
-  {
-    name: 'profile',
-    list: '/profile',
-    meta: {
-      label: 'Profile',
-      icon: <StarOutline />,
+      icon: <Group />,
     },
   },
 ];
