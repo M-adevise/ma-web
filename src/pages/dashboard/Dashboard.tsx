@@ -59,9 +59,7 @@ export const DashboardPage: React.FC = () => {
         <DashboardWeather />
         <Stack flexDirection='row' flexWrap='wrap' gap={3} mb={3}>
           <ItineraryCard onSubmit={handleSubmit} />
-          <Card sx={{ minWidth: '30rem', flexGrow: 3, height: '500px' }}>
-            <GoogleMap center={{ lat: latitude, lng: longitude }} zoom={15} mapContainerStyle={{ width: '100%', height: '100%' }} onLoad={load}></GoogleMap>
-          </Card>
+          <Card sx={{ minWidth: '30rem', flexGrow: 3, height: '500px' }}></Card>
         </Stack>
       </FormProvider>
       <Stack>

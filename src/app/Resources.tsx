@@ -2,34 +2,26 @@ import { Dashboard as DashboardIcon, History as HistoryIcon, Radio as RadioIcon,
 
 export const appResources = [
   {
-    name: 'dashboard',
+    name: 'appointments',
     list: '/',
     meta: {
-      label: 'Dashboard',
+      label: 'Appointments',
       icon: <DashboardIcon />,
     },
   },
   {
-    name: 'radio',
-    list: '/radio',
+    name: 'patients',
+    list: '/patients',
     meta: {
-      label: 'Radio',
-      icon: <RadioIcon />,
-    },
-  },
-  {
-    name: 'history',
-    list: '/history',
-    meta: {
-      label: 'Travel History',
+      label: 'Patients',
       icon: <HistoryIcon />,
     },
   },
   {
-    name: 'plan',
-    list: '/plan',
+    name: 'profile',
+    list: '/profile',
     meta: {
-      label: 'Upgrade Plan',
+      label: 'Profile',
       icon: <StarOutline />,
     },
   },

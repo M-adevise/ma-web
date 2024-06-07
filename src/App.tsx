@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Refine
               routerProvider={routerProvider}
               dataProvider={dataProvider}
-              authProvider={authProvider}
+              //authProvider={authProvider}
               i18nProvider={i18nProvider}
               options={{
                 syncWithLocation: true,

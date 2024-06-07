@@ -9,7 +9,7 @@ import { Radio } from '../pages/radio';
 import { DashboardPage } from '../pages/dashboard';
 import { HistoryList } from '../pages/history';
 import { authenticatedContainer } from './styles';
-import { Plan } from '../pages/plan';
+import { Plan } from '../pages/calendar';
 import { Google } from '@mui/icons-material';
 
 export const AppRoute = () => {
@@ -27,21 +27,20 @@ export const AppRoute = () => {
         }>
         <Route index element={<DashboardPage />} />
         <Route
-          path='/history'
+          path='/patients'
           element={
             <HistoryList>
               <Outlet />
             </HistoryList>
           }></Route>
 
-        <Route path='/radio' element={<Radio />} />
-        <Route path='/plan' element={<Plan />} />
+        <Route path='/profile' element={<Plan />} />
       </Route>
 
       <Route
         element={
           <Authenticated key='auth-pages' fallback={<Outlet />}>
-            <NavigateToResource resource='dashboard' />
+            <NavigateToResource resource='appointments' />
           </Authenticated>
         }>
         <Route
