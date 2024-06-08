@@ -6,11 +6,11 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
 import { AuthPage } from '../pages/auth';
 import { Radio } from '../pages/radio';
-import { DashboardPage } from '../pages/dashboard';
+import { DashboardPage } from '../pages/appointements';
 import { HistoryList } from '../pages/history';
 import { authenticatedContainer } from './styles';
-import { Plan } from '../pages/calendar';
 import { Google } from '@mui/icons-material';
+import { MessageList } from '../pages/inbox';
 
 export const AppRoute = () => {
   return (
@@ -25,7 +25,7 @@ export const AppRoute = () => {
             </ThemedLayoutV2>
           </Authenticated>
         }>
-        <Route index element={<Plan />} />
+        <Route index element={<MessageList />} />
         <Route
           path='/patients'
           element={
