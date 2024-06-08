@@ -5,8 +5,7 @@ import { CatchAllNavigate, NavigateToResource } from '@refinedev/react-router-v6
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
 import { AuthPage } from '../pages/auth';
-import { Radio } from '../pages/radio';
-import { DashboardPage } from '../pages/appointements';
+import { CalendarPage } from '../pages/appointements';
 import { HistoryList } from '../pages/history';
 import { authenticatedContainer } from './styles';
 import { Google } from '@mui/icons-material';
@@ -34,7 +33,7 @@ export const AppRoute = () => {
             </HistoryList>
           }></Route>
 
-        <Route path='/appointments' element={<DashboardPage />} />
+        <Route path='/appointments' element={<CalendarPage />} />
       </Route>
 
       <Route
