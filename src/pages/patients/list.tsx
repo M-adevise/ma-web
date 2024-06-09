@@ -3,7 +3,7 @@ import { RefineListView } from '../../components';
 import { Grid } from '@mui/material';
 import ImgMediaCard from '../../components/card/card';
 
-export const HistoryList = ({ children }: PropsWithChildren) => {
+export const PatientList = ({ children }: PropsWithChildren) => {
   return (
     <>
       <RefineListView breadcrumb={false}>

@@ -11,7 +11,7 @@ export const Title: React.FC<TitleProps> = ({ collapsed }) => {
     <Link to='/' style={{ textDecoration: 'none' }}>
       <Box display='flex' alignItems='center' gap={'12px'}>
         <Typography color='#00accb' fontSize='1.2rem' fontFamily='sans-serif' fontWeight='bold'>
-          {!collapsed ? 'Green Route' : 'G.R'}
+          {!collapsed ? 'Medical Advise' : 'MA'}
         </Typography>
       </Box>
     </Link>

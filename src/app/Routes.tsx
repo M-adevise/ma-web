@@ -6,7 +6,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
 import { AuthPage } from '../pages/auth';
 import { CalendarPage } from '../pages/appointements';
-import { HistoryList } from '../pages/history';
+import { PatientList } from '../pages/patients';
 import { authenticatedContainer } from './styles';
 import { Google } from '@mui/icons-material';
 import { MessageList } from '../pages/inbox';
@@ -28,9 +28,9 @@ export const AppRoute = () => {
         <Route
           path='/patients'
           element={
-            <HistoryList>
+            <PatientList>
               <Outlet />
-            </HistoryList>
+            </PatientList>
           }></Route>
 
         <Route path='/appointments' element={<CalendarPage />} />

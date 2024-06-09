@@ -9,14 +9,14 @@ import { Avatar } from '@mui/material';
 
 export default function ImgMediaCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <Avatar variant='square' style={{ width: '100%', height: 200 }} />
+    <Card sx={{ maxWidth: 250 }}>
+      <Avatar variant='square' style={{ width: '100%', height: 150 }} />
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
-          Lizard
+        <Typography variant='body1' component='div'>
+          Jean De La Montagne
         </Typography>
         <Typography variant='body2' color='text.secondary'>
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
+          20 ans, Lot IIIAB 13 TCR, Andrononobe, Antananarivo 103
         </Typography>
       </CardContent>
       <CardActions>
