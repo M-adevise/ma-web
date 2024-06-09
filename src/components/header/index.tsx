@@ -15,6 +15,7 @@ import { useContext } from 'react';
 import { ColorModeContext } from '../../contexts';
 import i18n from '../../i18n';
 import { User, fileProvider } from '../../providers';
+import { Notifications } from '@mui/icons-material';
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
   const { mode, setMode } = useContext(ColorModeContext);
@@ -71,6 +72,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
             xs: '8px',
             sm: '24px',
           }}>
+          <Notifications />
           <Stack
             direction='row'
             alignItems='center'
@@ -78,31 +80,6 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
               xs: '8px',
               sm: '24px',
             }}>
-            <Select
-              size='small'
-              defaultValue={currentLocale}
-              inputProps={{ 'aria-label': 'Without label' }}
-              variant='outlined'
-              sx={{
-                width: {
-                  xs: '120px',
-                  sm: '160px',
-                },
-              }}>
-              {[...(i18n.languages ?? [])].sort().map((lang: string) => (
-                <MenuItem
-                  selected={currentLocale === lang}
-                  key={lang}
-                  defaultValue={lang}
-                  onClick={() => {
-                    changeLanguage(lang);
-                  }}
-                  value={lang}>
-                  <Typography color='text.secondary'>{lang === 'en' ? 'English' : 'German'}</Typography>
-                </MenuItem>
-              ))}
-            </Select>
-
             <IconButton
               onClick={() => {
                 setMode();
