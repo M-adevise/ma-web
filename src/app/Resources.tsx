@@ -1,4 +1,4 @@
-import { CalendarMonth, Dashboard as DashboardIcon, Group, History as HistoryIcon, Inbox, Radio as RadioIcon, StarOutline } from '@mui/icons-material';
+import { AttachMoneyTwoTone, CalendarMonth, Feedback, Group, Inbox, Lightbulb } from '@mui/icons-material';
 
 export const appResources = [
   {
@@ -23,6 +23,30 @@ export const appResources = [
     meta: {
       label: 'Patients',
       icon: <Group />,
+    },
+  },
+  {
+    name: 'assitance',
+    list: '/assitance',
+    meta: {
+      label: 'AI Assitances',
+      icon: <Lightbulb />,
+    },
+  },
+  {
+    name: 'feedbacks',
+    list: '/feedbacks',
+    meta: {
+      label: 'Feedbacks',
+      icon: <Feedback />,
+    },
+  },
+  {
+    name: 'donations',
+    list: '/donations',
+    meta: {
+      label: 'Donations',
+      icon: <AttachMoneyTwoTone />,
     },
   },
 ];

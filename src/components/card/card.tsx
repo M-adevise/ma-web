@@ -2,12 +2,15 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
 
-export default function ImgMediaCard() {
+interface ImgMediaCardProps {
+  open: () => void;
+}
+
+export default function ImgMediaCard({ open }: ImgMediaCardProps) {
   return (
     <Card sx={{ maxWidth: 250 }}>
       <Avatar variant='square' style={{ width: '100%', height: 150 }} />
@@ -20,8 +23,10 @@ export default function ImgMediaCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Share</Button>
-        <Button size='small'>Learn More</Button>
+        <Button size='small' onClick={open}>
+          Medical Document
+        </Button>
+        <Button size='small'>Contact</Button>
       </CardActions>
     </Card>
   );
