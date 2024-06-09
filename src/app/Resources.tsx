@@ -26,10 +26,10 @@ export const appResources = [
     },
   },
   {
-    name: 'assitance',
-    list: '/assitance',
+    name: 'assistance',
+    list: '/assistance',
     meta: {
-      label: 'AI Assitances',
+      label: 'AI Assistances',
       icon: <Lightbulb />,
     },
   },
@@ -37,7 +37,7 @@ export const appResources = [
     name: 'feedbacks',
     list: '/feedbacks',
     meta: {
-      label: 'Feedbacks',
+      label: 'Profile & Feedbacks',
       icon: <Feedback />,
     },
   },

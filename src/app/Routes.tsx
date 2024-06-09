@@ -10,6 +10,7 @@ import { PatientList } from '../pages/patients';
 import { authenticatedContainer } from './styles';
 import { Google } from '@mui/icons-material';
 import { MessageList } from '../pages/inbox';
+import { AssistancePage } from '../pages/assistance';
 
 export const AppRoute = () => {
   return (
@@ -34,6 +35,7 @@ export const AppRoute = () => {
           }></Route>
 
         <Route path='/appointments' element={<CalendarPage />} />
+        <Route path='/assistance' element={<AssistancePage />} />
       </Route>
 
       <Route
