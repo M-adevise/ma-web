@@ -41,12 +41,4 @@ export const appResources = [
       icon: <Face />,
     },
   },
-  {
-    name: 'donations',
-    list: '/donations',
-    meta: {
-      label: 'Donations',
-      icon: <AttachMoneyTwoTone />,
-    },
-  },
 ];
