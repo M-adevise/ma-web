@@ -1,4 +1,4 @@
-import { AttachMoneyTwoTone, CalendarMonth, Feedback, Group, Inbox, Lightbulb } from '@mui/icons-material';
+import { AttachMoneyTwoTone, CalendarMonth, Face, Group, Inbox, Lightbulb } from '@mui/icons-material';
 
 export const appResources = [
   {
@@ -34,11 +34,11 @@ export const appResources = [
     },
   },
   {
-    name: 'feedbacks',
-    list: '/feedbacks',
+    name: 'profile',
+    list: '/profile',
     meta: {
-      label: 'Profile & Feedbacks',
-      icon: <Feedback />,
+      label: 'Profile',
+      icon: <Face />,
     },
   },
   {

@@ -11,6 +11,8 @@ import { authenticatedContainer } from './styles';
 import { Google } from '@mui/icons-material';
 import { MessageList } from '../pages/inbox';
 import { AssistancePage } from '../pages/assistance';
+import { ProfilePage } from '../pages/profile';
+import { CallPage } from '../pages/call';
 
 export const AppRoute = () => {
   return (
@@ -36,6 +38,8 @@ export const AppRoute = () => {
 
         <Route path='/appointments' element={<CalendarPage />} />
         <Route path='/assistance' element={<AssistancePage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/call' element={<CallPage />} />
       </Route>
 
       <Route
