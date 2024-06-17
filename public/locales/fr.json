@@ -1,0 +1,439 @@
+{
+  "pages": {
+    "login": {
+      "title": "Connectez-vous à votre compte",
+      "signin": "Se connecter",
+      "signup": "S'inscrire",
+      "divider": "ou",
+      "fields": {
+        "email": "Email",
+        "password": "Mot de passe"
+      },
+      "errors": {
+        "validEmail": "Adresse email invalide"
+      },
+      "buttons": {
+        "submit": "Connexion",
+        "forgotPassword": "Mot de passe oublié?",
+        "noAccount": "Vous n'avez pas de compte?",
+        "rememberMe": "Se souvenir de moi"
+      }
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié?",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Adresse email invalide"
+      },
+      "buttons": {
+        "submit": "Envoyer les instructions de réinitialisation"
+      }
+    },
+    "register": {
+      "title": "Créez votre compte",
+      "fields": {
+        "email": "Email",
+        "password": "Mot de passe"
+      },
+      "errors": {
+        "validEmail": "Adresse email invalide"
+      },
+      "buttons": {
+        "submit": "S'inscrire",
+        "haveAccount": "Vous avez un compte?"
+      }
+    },
+    "updatePassword": {
+      "title": "Mettre à jour le mot de passe",
+      "fields": {
+        "password": "Nouveau mot de passe",
+        "confirmPassword": "Confirmez le nouveau mot de passe"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Les mots de passe ne correspondent pas"
+      },
+      "buttons": {
+        "submit": "Mettre à jour"
+      }
+    },
+    "error": {
+      "info": "Vous avez peut-être oublié d'ajouter le composant {{action}} à la ressource {{resource}}.",
+      "404": "Désolé, la page que vous avez visitée n'existe pas.",
+      "resource404": "Êtes-vous sûr d'avoir créé la ressource {{resource}}.",
+      "backHome": "Retour à l'accueil"
+    }
+  },
+  "actions": {
+    "list": "Lister",
+    "create": "Créer",
+    "edit": "Éditer",
+    "show": "Afficher",
+    "delete": "Supprimer",
+    "cancel": "Annuler"
+  },
+  "buttons": {
+    "add": "Ajouter",
+    "create": "Créer",
+    "save": "Enregistrer",
+    "logout": "Déconnexion",
+    "delete": "Supprimer",
+    "edit": "Éditer",
+    "cancel": "Annuler",
+    "confirm": "Êtes-vous sûr?",
+    "filter": "Filtrer",
+    "clear": "Effacer",
+    "refresh": "Rafraîchir",
+    "show": "Afficher",
+    "undo": "Annuler",
+    "import": "Importer",
+    "export": "Exporter",
+    "clone": "Cloner",
+    "accept": "Accepter",
+    "acceptAll": "Tout accepter",
+    "reject": "Rejeter",
+    "rejectAll": "Tout rejeter",
+    "nextStep": "Suivant",
+    "previousStep": "Précédent"
+  },
+  "loading": "Chargement",
+  "tags": {
+    "clone": "Cloner"
+  },
+  "table": {
+    "actions": "Actions",
+    "inTotal": "au total"
+  },
+  "search": {
+    "placeholder": "Rechercher par ID de magasin, E-mail, Mot-clé",
+    "more": "plus"
+  },
+  "status": {
+    "enable": "Activer",
+    "disable": "Désactiver"
+  },
+  "warnWhenUnsavedChanges": "Êtes-vous sûr de vouloir partir? Vous avez des modifications non enregistrées.",
+  "notifications": {
+    "success": "Réussi",
+    "error": "Erreur (code de statut: {{statusCode}})",
+    "undoable": "Vous avez {{seconds}} secondes pour annuler",
+    "createSuccess": "{{resource}} créé avec succès",
+    "createError": "Une erreur s'est produite lors de la création de {{resource}} (code de statut: {{statusCode}})",
+    "deleteSuccess": "{{resource}} supprimé avec succès",
+    "deleteError": "Erreur lors de la suppression de {{resource}} (code de statut: {{statusCode}})",
+    "editSuccess": "{{resource}} modifié avec succès",
+    "editError": "Erreur lors de la modification de {{resource}} (code de statut: {{statusCode}})",
+    "importProgress": "Importation: {{processed}}/{{total}}"
+  },
+  "categories": {
+    "categories": "Catégories",
+    "titles": {
+      "list": "Catégories"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Titre",
+      "products": "Produits",
+      "isActive": {
+        "label": "Statut",
+        "true": "Visible",
+        "false": "Invisible"
+      }
+    }
+  },
+  "couriers": {
+    "couriers": "Coursiers",
+    "titles": {
+      "create": "Créer un coursier",
+      "list": "Coursiers",
+      "edit": "Éditer le coursier"
+    },
+    "fields": {
+      "id": "ID",
+      "avatar": {
+        "label": "Avatar",
+        "description": "Cliquez ou faites glisser l'image de l'avatar dans cette zone pour télécharger."
+      },
+      "name": {
+        "label": "Nom",
+        "placeholder": "Veuillez entrer le nom du coursier"
+      },
+      "surname": {
+        "label": "Prénom",
+        "placeholder": "Veuillez entrer le prénom du coursier"
+      },
+      "gender": {
+        "label": "Sexe",
+        "male": "Homme",
+        "female": "Femme"
+      },
+      "gsm": {
+        "label": "Gsm",
+        "placeholder": "Veuillez entrer le gsm du coursier"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Veuillez entrer l'email du coursier"
+      },
+      "address": {
+        "label": "Adresse",
+        "placeholder": "Veuillez entrer l'adresse du coursier"
+      },
+      "createdAt": "Créé le",
+      "status": {
+        "label": "Statut",
+        "Available": "Disponible",
+        "Offline": "Hors ligne",
+        "On delivery": "En livraison"
+      },
+      "vehicleType": {
+        "label": "Type de véhicule",
+        "placeholder": "Veuillez entrer le type de véhicule"
+      },
+      "licensePlate": {
+        "label": "ID du véhicule",
+        "placeholder": "Veuillez entrer l'ID du véhicule",
+        "patternMessage": "Veuillez entrer un ID de véhicule valide. Exemple : ABC 123"
+      },
+      "rating": {
+        "label": "Note",
+        "placeholder": "Veuillez entrer la note"
+      },
+      "images": {
+        "label": "Images",
+        "description": "Ajouter une photo de l'utilisateur",
+        "validation": "doit être 480x480 px"
+      },
+      "store": {
+        "label": "Magasin",
+        "placeholder": "Sélectionner un magasin"
+      },
+      "vehicle": {
+        "label": "Véhicule",
+        "placeholder": "Sélectionner un véhicule"
+      },
+      "accountNumber": {
+        "label": "Numéro de compte",
+        "placeholder": "Veuillez entrer le numéro de compte"
+      }
+    },
+    "filter": {
+      "title": "Filtres",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Rechercher le nom"
+      },
+      "licensePlate": {
+        "label": "Nom",
+        "placeholder": "Rechercher le nom"
+      },
+      "gsm": {
+        "label": "Gsm",
+        "placeholder": "Rechercher le gsm"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Rechercher l'email"
+      },
+      "submit": "Filtrer"
+    },
+    "steps": {
+      "personal": "Personnel",
+      "company": "Entreprise",
+      "vehicle": "Véhicule"
+    },
+    "actions": {
+      "add": "Ajouter un nouveau coursier",
+      "edit": "Éditer le coursier"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "overview": {
+      "title": "Aperçu"
+    },
+    "filter": {
+      "title": "Filtres",
+      "date": {
+        "lastWeek": "La semaine dernière",
+        "lastMonth": "Le mois dernier",
+        "lastYear": "L'année dernière"
+      }
+    },
+    "deliveryMap": {
+      "title": "Carte de l'itinéraire"
+    },
+    "orders": {
+      "title": "Commandes"
+    },
+    "revenue": {
+      "title": "Revenu"
+    },
+    "totalSales": {
+      "title": "Ventes totales"
+    },
+    "dailyRevenue": {
+      "title": "Revenu quotidien"
+    },
+    "dailyOrders": {
+      "title": "Commandes quotidiennes"
+    },
+    "monthlyRevenue": {
+      "title": "Revenu mensuel"
+    },
+    "monthlyOrders": {
+      "title": "Commandes mensuelles"
+    },
+    "summary": {
+      "title": "Résumé",
+      "topStores": "Meilleurs magasins"
+    }
+  },
+  "orders": {
+    "orders": "Commandes",
+    "titles": {
+      "list": "Commandes",
+      "edit": "Éditer la commande"
+    },
+    "actions": {
+      "add": "Ajouter une commande"
+    },
+    "fields": {
+      "id": "ID",
+      "products": "Produits",
+      "total": "Total",
+      "status": {
+        "label": "Statut",
+        "Ready": "Prêt",
+        "On the way": "En route",
+        "Delivered": "Livré"
+      },
+      "store": "Magasin",
+      "courier": "Coursier",
+      "createdAt": "Créé le",
+      "rider": {
+        "label": "Rider",
+        "placeholder": "Sélectionner un rider"
+      },
+      "customer": {
+        "label": "Client",
+        "placeholder": "Sélectionner un client"
+      },
+      "deliveryTime": {
+        "label": "Temps de livraison",
+        "placeholder": "Sélectionner une date et une heure"
+      },
+      "deliveryAddress": {
+        "label": "Adresse de livraison",
+        "placeholder": "Entrer l'adresse de livraison"
+      },
+      "pickupAddress": {
+        "label": "Adresse de ramassage",
+        "placeholder": "Entrer l'adresse de ramassage"
+      },
+      "items": {
+        "label": "Articles",
+        "placeholder": "Ajouter des articles"
+      },
+      "note": {
+        "label": "Note",
+        "placeholder": "Ajouter une note"
+      }
+    }
+  },
+  "products": {
+    "products": "Produits",
+    "titles": {
+      "create": "Créer un produit",
+      "list": "Produits",
+      "edit": "Éditer le produit"
+    },
+    "fields": {
+      "id": "ID",
+      "title": {
+        "label": "Titre",
+        "placeholder": "Veuillez entrer le titre"
+      },
+      "isActive": {
+        "label": "Statut",
+        "true": "Visible",
+        "false": "Invisible"
+      },
+      "price": {
+        "label": "Prix",
+        "placeholder": "Veuillez entrer le prix"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Veuillez entrer la description"
+      },
+      "category": {
+        "label": "Catégorie",
+        "placeholder": "Veuillez sélectionner une catégorie"
+      },
+      "images": {
+        "label": "Images",
+        "description": "Ajouter une photo de l'utilisateur",
+        "validation": "doit être 480x480 px"
+      },
+      "createdAt": "Créé le",
+      "stock": {
+        "label": "Stock",
+        "placeholder": "Veuillez entrer la quantité en stock"
+      },
+      "rating": {
+        "label": "Note",
+        "placeholder": "Veuillez entrer la note"
+      }
+    },
+    "actions": {
+      "add": "Ajouter un nouveau produit",
+      "edit": "Éditer le produit"
+    }
+  },
+  "users": {
+    "users": "Utilisateurs",
+    "titles": {
+      "create": "Créer un utilisateur",
+      "list": "Utilisateurs",
+      "edit": "Éditer l'utilisateur"
+    },
+    "fields": {
+      "id": "ID",
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Veuillez entrer le prénom"
+      },
+      "lastName": {
+        "label": "Nom de famille",
+        "placeholder": "Veuillez entrer le nom de famille"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Veuillez entrer l'email"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Veuillez entrer le mot de passe"
+      },
+      "avatar": {
+        "label": "Avatar",
+        "description": "Cliquez ou faites glisser l'image de l'avatar dans cette zone pour télécharger."
+      },
+      "status": {
+        "label": "Statut",
+        "true": "Actif",
+        "false": "Inactif"
+      },
+      "role": {
+        "label": "Rôle",
+        "placeholder": "Sélectionner un rôle"
+      }
+    },
+    "actions": {
+      "add": "Ajouter un utilisateur",
+      "edit": "Éditer l'utilisateur"
+    }
+  }
+}
