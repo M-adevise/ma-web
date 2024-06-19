@@ -6,9 +6,9 @@ import { RefineSnackbarProvider, useNotificationProvider } from '@refinedev/mui'
 import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from '@refinedev/react-router-v6';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
-import { appResources, AppRoute } from './app';
-import { ColorModeContextProvider } from './contexts';
-import { authProvider, dataProvider } from './providers';
+import { AppRoute, appResources } from './app';
+import { dataProvider } from './providers';
+import { ThemeProvider } from './theme';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -21,7 +21,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <KBarProvider>
-        <ColorModeContextProvider>
+        <ThemeProvider>
           <CssBaseline />
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: 'auto' } }} />
           <RefineSnackbarProvider>
@@ -43,7 +43,7 @@ const App: React.FC = () => {
               <DocumentTitleHandler />
             </Refine>
           </RefineSnackbarProvider>
-        </ColorModeContextProvider>
+        </ThemeProvider>
       </KBarProvider>
     </BrowserRouter>
   );

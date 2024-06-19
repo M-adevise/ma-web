@@ -1,6 +1,5 @@
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { DarkThemeWithResponsiveFontSizes as DarkTheme, LightThemeWithResponsiveFontSizes as LightTheme } from '../theme';
 
 type ColorModeContextType = {
   mode: string;
@@ -33,9 +32,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({ children
       value={{
         setMode: setColorMode,
         mode,
-      }}>
-      <ThemeProvider theme={mode === 'light' ? LightTheme : DarkTheme}>{children}</ThemeProvider>
-    </ColorModeContext.Provider>
+      }}></ColorModeContext.Provider>
   );
 };
 
