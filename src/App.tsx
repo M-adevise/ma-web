@@ -7,7 +7,7 @@ import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from '@r
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoute, appResources } from './app';
-import { dataProvider } from './providers';
+import { accessControlProvider, dataProvider } from './providers';
 import { ThemeProvider } from './theme';
 
 const App: React.FC = () => {
@@ -36,6 +36,7 @@ const App: React.FC = () => {
                 breadcrumb: false,
                 useNewQueryKeys: true,
               }}
+              accessControlProvider={accessControlProvider}
               notificationProvider={useNotificationProvider}
               resources={appResources}>
               <AppRoute />
