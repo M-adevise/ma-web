@@ -1,10 +1,10 @@
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Chip, { ChipProps } from '@mui/material/Chip';
+import { green } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 import { useTranslate } from '@refinedev/core';
 import { IStore } from '../../../interfaces';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
-import { useTheme } from '@mui/material/styles';
-import { green } from '@mui/material/colors';
 
 type Props = {
   value: IStore['isActive'];

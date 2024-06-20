@@ -1,11 +1,10 @@
+import { Notifications } from '@mui/icons-material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import BrightnessHighIcon from '@mui/icons-material/BrightnessHigh';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -13,9 +12,7 @@ import { useGetIdentity, useGetLocale, useSetLocale, useTranslate } from '@refin
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from '@refinedev/mui';
 import { useContext } from 'react';
 import { ColorModeContext } from '../../contexts';
-import i18n from '../../i18n';
 import { User, fileProvider } from '../../providers';
-import { Notifications } from '@mui/icons-material';
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
   const { mode, setMode } = useContext(ColorModeContext);

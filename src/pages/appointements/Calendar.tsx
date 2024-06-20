@@ -1,12 +1,11 @@
-import { Dialog, DialogTitle } from '@mui/material';
 import moment from 'moment';
 import React, { FC, useState } from 'react';
 import { Calendar, SlotInfo, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { RefineListView } from '../../components';
-import { CalendarEvent, EditEventDialogState } from './types';
 import { EditEventDialog } from './EditEventDialog';
+import { CalendarEvent, EditEventDialogState } from './types';
 
 export const CalendarPage: FC = () => {
   const localizer = momentLocalizer(moment);

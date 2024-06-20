@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { debounce } from '@mui/material/utils';
 import parse from 'autosuggest-highlight/parse';
-import { useState, useMemo, useEffect, HTMLAttributes, FC } from 'react';
+import { FC, HTMLAttributes, useEffect, useMemo, useState } from 'react';
 
 const autocompleteService = { current: null };
 

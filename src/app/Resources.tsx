@@ -1,4 +1,4 @@
-import { AttachMoneyTwoTone, CalendarMonth, Face, Group, Inbox, Lightbulb } from '@mui/icons-material';
+import { CalendarMonth, Face, Group, Inbox, Lightbulb } from '@mui/icons-material';
 
 export const appResources = [
   {

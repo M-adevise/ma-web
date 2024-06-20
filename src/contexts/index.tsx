@@ -1,5 +1,4 @@
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
 
 type ColorModeContextType = {
   mode: string;

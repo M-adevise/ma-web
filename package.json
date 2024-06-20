@@ -78,6 +78,7 @@
     "@types/uuid": "^9.0.8",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "typescript": "^5.4.2",
     "vite": "^5.1.6"
   }

@@ -1,4 +1,4 @@
-import { AuthProps, AuthPage as MUIAuthPage } from '@refinedev/mui';
+import { AuthPage as MUIAuthPage } from '@refinedev/mui';
 import * as React from 'react';
 import LOGO from '../../assets/logo.png';
 

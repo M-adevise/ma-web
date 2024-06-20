@@ -1,6 +1,6 @@
-import { PropsWithChildren, useMemo, useState } from 'react';
-import { RefineListView } from '../../components';
 import { Grid } from '@mui/material';
+import { PropsWithChildren, useState } from 'react';
+import { RefineListView } from '../../components';
 import ImgMediaCard from '../../components/card/card';
 import { PatientShow } from './show';
 

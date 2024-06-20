@@ -1,6 +1,6 @@
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { FC, useState } from 'react';
 import { EditEventDialogProps } from './types';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
 
 export const EditEventDialog: FC<EditEventDialogProps> = ({ event, isOpen, close }) => {
   const [title, setTitle] = useState(event.title);

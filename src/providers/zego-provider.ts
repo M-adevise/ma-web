@@ -1,4 +1,3 @@
-
 // const ZegoConf = {
 //   appId: import.meta.env.VITE_ZEGO_APP_ID,
 //   server: import.meta.env.VITE_ZEGO_APP_SERVER,

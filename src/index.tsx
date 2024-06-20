@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 
 import App from './App';
 
-import './i18n';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import './i18n';
 
 dayjs.extend(relativeTime);
 

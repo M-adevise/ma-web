@@ -1,5 +1,5 @@
-import { Itinerary } from '../gen';
 import { v4 } from 'uuid';
+import { Itinerary } from '../gen';
 
 export const activityMapper = {
   toDomain(itinerary: Itinerary) {

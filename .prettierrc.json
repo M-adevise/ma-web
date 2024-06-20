@@ -6,7 +6,7 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "jsxSingleQuote": true,
-  "plugins": [],
+  "plugins": ["prettier-plugin-organize-imports"],
   "bracketSameLine": true,
   "bracketSpacing": true
 }

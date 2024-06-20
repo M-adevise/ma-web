@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { cache, getCached } from '../utils';
-import { mapProvider } from '../providers/map-provider';
 import { Coordinate } from '../interfaces';
+import { mapProvider } from '../providers/map-provider';
+import { cache, getCached } from '../utils';
 
 export const useGetGeoLocation = () => {
   const [location, setLocation] = useState<Coordinate>({

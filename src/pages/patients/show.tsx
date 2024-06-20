@@ -1,9 +1,9 @@
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import { FC } from 'react';
-import { Drawer, DrawerHeader } from '../../components';
-import { Itinerary } from '../../providers';
 import { Document, Page, pdfjs } from 'react-pdf';
 import pdffile from '../../assets/cv.pdf';
+import { Drawer, DrawerHeader } from '../../components';
+import { Itinerary } from '../../providers';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.js', import.meta.url).toString();
 

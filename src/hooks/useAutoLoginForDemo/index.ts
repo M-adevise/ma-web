@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-import { authProvider } from '../../providers';
+import { useEffect, useState } from 'react';
 
 /**
  * This hook is used to automatically login the user.

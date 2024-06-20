@@ -1,4 +1,3 @@
-export * from './utilities';
 export * from './ThemeProvider';
 export * from './css';
 export * from './custom-shadows';
@@ -7,3 +6,4 @@ export * from './palette';
 export * from './shadows';
 export * from './types';
 export * from './typography';
+export * from './utilities';

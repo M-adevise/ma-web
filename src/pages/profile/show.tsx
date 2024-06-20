@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { RefineListView } from '../../components';
-import { Card, CardContent, CardHeader, Grid, Paper, Typography } from '@mui/material';
-import img from '../../assets/logo.png';
-import { blue, green, pink, red } from '@mui/material/colors';
 import { Star } from '@mui/icons-material';
+import { Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+import { blue, green, pink, red } from '@mui/material/colors';
+import { FC } from 'react';
+import img from '../../assets/logo.png';
+import { RefineListView } from '../../components';
 
 export const ProfilePage: FC<{}> = () => {
   return (

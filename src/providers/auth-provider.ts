@@ -1,11 +1,10 @@
 import { AuthProvider } from '@refinedev/core';
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { v4 } from 'uuid';
 import { cache, clearCached, getCached } from '../utils';
 import { securityApi, userApi } from './api';
 import { auth } from './firebase-conf';
 import { Configuration } from './gen';
-import { AxiosError } from 'axios';
-import { v4 } from 'uuid';
 
 export const authProvider: AuthProvider & {
   getConfig: () => Configuration;

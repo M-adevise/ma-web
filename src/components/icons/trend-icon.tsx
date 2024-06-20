@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
-import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Box from '@mui/material/Box';
+import { ReactNode } from 'react';
 
 type Props = {
   text?: ReactNode;

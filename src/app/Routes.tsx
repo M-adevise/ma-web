@@ -1,18 +1,18 @@
+import { Google } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { Authenticated, ErrorComponent } from '@refinedev/core';
 import { ThemedLayoutV2 } from '@refinedev/mui';
 import { CatchAllNavigate, NavigateToResource } from '@refinedev/react-router-v6';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
-import { AuthPage } from '../pages/auth';
 import { CalendarPage } from '../pages/appointements';
-import { PatientList } from '../pages/patients';
-import { authenticatedContainer } from './styles';
-import { Google } from '@mui/icons-material';
-import { MessageList } from '../pages/inbox';
 import { AssistancePage } from '../pages/assistance';
-import { ProfilePage } from '../pages/profile';
+import { AuthPage } from '../pages/auth';
 import { CallPage } from '../pages/call';
+import { MessageList } from '../pages/inbox';
+import { PatientList } from '../pages/patients';
+import { ProfilePage } from '../pages/profile';
+import { authenticatedContainer } from './styles';
 
 export const AppRoute = () => {
   return (

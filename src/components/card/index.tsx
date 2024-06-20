@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react';
 import CardBase, { CardProps } from '@mui/material/Card';
-import CardHeader, { CardHeaderProps } from '@mui/material/CardHeader';
 import CardContent, { CardContentProps } from '@mui/material/CardContent';
+import CardHeader, { CardHeaderProps } from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import { PropsWithChildren } from 'react';
 
 type Props = {
   title?: React.ReactNode;
