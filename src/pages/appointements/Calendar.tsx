@@ -3,14 +3,13 @@ import React, { FC, useState } from 'react';
 import { Calendar, SlotInfo, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { v4 as uuidV4Generator } from 'uuid';
 import { RefineListView } from '../../components';
 import { EditEventDialog } from './EditEventDialog';
 import { CalendarEvent, EditEventDialogState } from './types';
 
 export const CalendarPage: FC = () => {
   const localizer = momentLocalizer(moment);
-
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [{ event: currentCalendarEvent, isOpen: isEditEventDialogOpen }, setEditEventDialogState] = useState<EditEventDialogState>({ event: null, isOpen: false });
 
   const handleToggleEditEventDialog = () => setEditEventDialogState(prevState => ({ ...prevState, isOpen: !prevState.isOpen }));
@@ -20,18 +19,13 @@ export const CalendarPage: FC = () => {
   };
 
   const handleSelectSlot = ({ start, end }: SlotInfo) => {
-    const title = window.prompt('New Event name');
-    if (title) {
-      setEvents([
-        ...events,
-        {
-          id: `${events.length + 1}`,
-          title,
-          start,
-          end,
-        },
-      ]);
-    }
+    const event: CalendarEvent = {
+      id: uuidV4Generator(),
+      end,
+      start,
+      title: 'Event',
+    };
+    setEditEventDialogState({ event, isOpen: true });
   };
 
   return (
@@ -41,7 +35,8 @@ export const CalendarPage: FC = () => {
         onSelectEvent={handleSelectEvent}
         localizer={localizer}
         onSelectSlot={handleSelectSlot}
-        events={events}
+        //TODO: put here all event from back end
+        events={[]}
         startAccessor='start'
         endAccessor='end'
         style={{ height: 600, width: '100%' }}
