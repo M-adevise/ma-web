@@ -1,4 +1,4 @@
-import { pxToRem, responsiveFontSizes } from '.';
+import { pxToRem, responsiveFontSizes } from './utilities';
 
 export const primaryFont = 'Public Sans, sans-serif';
 export const secondaryFont = 'Barlow, sans-serif';

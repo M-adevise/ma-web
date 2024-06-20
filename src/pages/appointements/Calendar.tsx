@@ -25,7 +25,7 @@ export const CalendarPage: FC = () => {
       setEvents([
         ...events,
         {
-          id: events.length + 1,
+          id: `${events.length + 1}`,
           title,
           start,
           end,
