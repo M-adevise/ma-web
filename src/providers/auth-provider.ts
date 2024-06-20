@@ -98,7 +98,6 @@ export const authProvider: AuthProvider & {
     return conf;
   },
   async onError(error) {
-    console.log((error as AxiosError).code);
     return { error };
   },
   async loginGoogle() {

@@ -1,14 +1,13 @@
+import { Grid, Typography } from '@mui/material';
 import { FC, useEffect, useRef } from 'react';
 import { RefineListView } from '../../components';
-import { Grid, Paper, Typography } from '@mui/material';
-import { ZegoProvider } from '../../providers/zego-provider';
 
 export const CallPage: FC = () => {
-  const localUserRef = useRef<HTMLElement>();
-  const remoteUseref = useRef<HTMLElement>();
+  const localUserRef = useRef<HTMLDivElement>(null);
+  const remoteUseref = useRef<HTMLDivElement>(null);
 
   const call = () => {
-    ZegoProvider.joinCall('room3', 'nyhasina', localUserRef.current, 'token');
+    // localUserRef.current && ZegoProvider.joinCall('room3', 'nyhasina', localUserRef.current, 'token');
   };
 
   useEffect(() => {
