@@ -1,9 +1,11 @@
 import { BaseRecord, DataProvider, DeleteOneParams, DeleteOneResponse } from '@refinedev/core';
 import { appointmentProvider } from './appointment-provider';
+import { channelProvider } from './channel-provider';
 import { doctorProvider } from './doctor-provider';
 import { feedbackProvider } from './feedback-provider';
 import { hospitalProvider } from './hospital-provider';
 import { medicalInfoProvider } from './medical-info-provider';
+import { messageProvider } from './messages-provider';
 import { patientProvider } from './patient-provider';
 import { ProviderType } from './types';
 
@@ -21,6 +23,12 @@ const getProvider = (resource: string): ProviderType<any, any> => {
       return medicalInfoProvider;
     case 'patients':
       return patientProvider;
+    case 'messages':
+      return messageProvider;
+    case 'messages':
+      return messageProvider;
+    case 'channel':
+      return channelProvider;
     default:
       throw new Error('Unknown provider');
   }
