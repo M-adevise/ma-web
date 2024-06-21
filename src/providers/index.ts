@@ -1,9 +1,11 @@
 export * from './access-control-provider';
 export * from './api';
+export * from './appointment-provider';
 export * from './auth-provider';
 export * from './data-provider';
 export * from './doctor-provider';
+export * from './feedback-provider';
 export * from './file-provider';
 export * from './gen';
+export * from './medical-info-provider';
 export * from './patient-provider';
-
