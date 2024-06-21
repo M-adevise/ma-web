@@ -1,4 +1,4 @@
-import { userApi } from './api';
+import { departmentApi, userApi } from './api';
 import { Doctor } from './gen';
 
 export const doctorProvider = {
@@ -8,6 +8,10 @@ export const doctorProvider = {
   },
   async getOne(doctorId: string) {
     const { data } = await userApi().getDoctorById(doctorId);
+    return data;
+  },
+  async getAllByHospitalId(hospitalId: string) {
+    const { data } = await departmentApi().getDoctorsByHospitalsId(hospitalId);
     return data;
   },
   async crupdate(doctorId: string, doctor: Doctor) {
