@@ -25,8 +25,6 @@ const getProvider = (resource: string): ProviderType<any, any> => {
       return patientProvider;
     case 'messages':
       return messageProvider;
-    case 'messages':
-      return messageProvider;
     case 'channel':
       return channelProvider;
     default:
