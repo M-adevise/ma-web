@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Green Route API
- * This API provides access to the Green Route service.
+ * M-Advise
+ * This API provides access to the M-Advise service.
  *
  * The version of the OpenAPI document: latest
  *
@@ -18,7 +18,7 @@ import type { Configuration } from './configuration';
 import type { AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+export const BASE_PATH = 'http://localhost:8080'.replace(/\/+$/, '');
 
 /**
  *

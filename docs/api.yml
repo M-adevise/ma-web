@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  version: "latest"
+  version: 'latest'
   title: M-Advise
   description: This API provides access to the M-Advise service.
 servers:
-  - url: "http://localhost:8080"
+  - url: 'http://localhost:8080'
 
 paths:
   /ping:
@@ -24,7 +24,7 @@ paths:
                 type: string
                 example: pong
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
 
   /signin:
     post:
@@ -34,22 +34,22 @@ paths:
       operationId: signIn
       security: []
       responses:
-        "201":
+        '201':
           description: Logged in payload.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
   /signup:
     post:
@@ -64,24 +64,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/User'
       responses:
-        "201":
+        '201':
           description: Signed up user.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /call/tokens:
     post:
       tags:
@@ -101,7 +101,7 @@ paths:
                 username:
                   type: string
       responses:
-        "200":
+        '200':
           description: Generated token
           content:
             application/json:
@@ -113,16 +113,16 @@ paths:
                   expiresIn:
                     type: integer
                     description: expiration date-time in seconds
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /doctors:
     get:
       tags:
@@ -131,24 +131,24 @@ paths:
       operationId: getDoctors
       security: []
       responses:
-        "200":
+        '200':
           description: Required doctor
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Doctor"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                  $ref: '#/components/schemas/Doctor'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /doctors/{id}/feedbacks:
     get:
       tags:
@@ -163,22 +163,22 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Feedbacks
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FeedbackSummary"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/FeedbackSummary'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Activity
@@ -194,31 +194,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Feedback"
+              $ref: '#/components/schemas/Feedback'
       responses:
-        "200":
+        '200':
           description: Feedback
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Feedback"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Feedback'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /appointments/{id}:
     get:
       tags:
         - Activity
       summary: Read an appointment
       operationId: readAppointment
-      security: [ ]
+      security: []
       parameters:
         - name: id
           in: path
@@ -226,22 +226,22 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: The appointment
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Appointment"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Appointment'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Activity
@@ -257,24 +257,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Appointment"
+              $ref: '#/components/schemas/Appointment'
       responses:
-        "200":
+        '200':
           description: The appointment
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Appointment"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Appointment'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /doctors/{id}/appointments:
     get:
       tags:
@@ -289,31 +289,31 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: List of appointments
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Appointment"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                  $ref: '#/components/schemas/Appointment'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /patients/{id}/appointments:
     get:
       tags:
         - Activity
       summary: Get all appointments of a patient
       operationId: getPatientsAppointments
-      security: [ ]
+      security: []
       parameters:
         - name: id
           in: path
@@ -321,24 +321,24 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: List of appointments
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Appointment"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                  $ref: '#/components/schemas/Appointment'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /doctors/{id}:
     get:
       tags:
@@ -353,22 +353,22 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Required doctor
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Doctor"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Doctor'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - User
@@ -386,22 +386,22 @@ paths:
             schema:
               $ref: '#/components/schemas/Doctor'
       responses:
-        "200":
+        '200':
           description: Crupdated doctor
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Doctor"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Doctor'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
   /doctors/{id}/patients:
     get:
@@ -417,16 +417,16 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: List of patients
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Patient"
-        "500":
-          $ref: "#/components/responses/500"
+                  $ref: '#/components/schemas/Patient'
+        '500':
+          $ref: '#/components/responses/500'
 
   /patients/{id}:
     get:
@@ -442,22 +442,22 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Required patient
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Patient"
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+                $ref: '#/components/schemas/Patient'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /users/{id}/raw:
     post:
       tags:
@@ -486,7 +486,7 @@ paths:
                 type: string
                 example: photo.png
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
 
   /patients/{id}/medical_info:
     get:
@@ -502,23 +502,23 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: The document
           content:
             application/pdf:
               schema:
                 type: string
                 format: binary
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Activity
@@ -534,25 +534,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MedicalInfo"
+              $ref: '#/components/schemas/MedicalInfo'
       responses:
-        "200":
+        '200':
           description: The document
           content:
             application/pdf:
               schema:
                 type: string
                 format: binary
-        "400":
-          $ref: "#/components/responses/400"
-        "403":
-          $ref: "#/components/responses/403"
-        "404":
-          $ref: "#/components/responses/404"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
   /hospitals:
     get:
@@ -569,9 +569,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Hospital"
+                  $ref: '#/components/schemas/Hospital'
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Department
@@ -584,7 +584,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/Hospital"
+                $ref: '#/components/schemas/Hospital'
       responses:
         200:
           description: File key
@@ -593,9 +593,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Hospital"
+                  $ref: '#/components/schemas/Hospital'
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
 
   /department/{id}/doctors:
     get:
@@ -612,16 +612,16 @@ paths:
           description: hospital identifier
       security: []
       responses:
-        "200":
+        '200':
           description: List of doctors
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Doctor"
-        "500":
-          $ref: "#/components/responses/500"
+                  $ref: '#/components/schemas/Doctor'
+        '500':
+          $ref: '#/components/responses/500'
   /raw/{fileId}:
     post:
       tags:
@@ -650,7 +650,7 @@ paths:
                 type: string
                 example: photo.png
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
     get:
       tags:
         - File
@@ -672,7 +672,7 @@ paths:
                 type: string
                 format: binary
         500:
-          $ref: "#/components/responses/500"
+          $ref: '#/components/responses/500'
 
 components:
   responses:
@@ -681,31 +681,31 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BadRequestException"
+            $ref: '#/components/schemas/BadRequestException'
     403:
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/NotAuthorizedException"
+            $ref: '#/components/schemas/NotAuthorizedException'
     404:
       description: Not found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ResourceNotFoundException"
+            $ref: '#/components/schemas/ResourceNotFoundException'
     429:
       description: Too many requests to the API
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/TooManyRequestsException"
+            $ref: '#/components/schemas/TooManyRequestsException'
     500:
       description: Internal server error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/InternalServerException"
+            $ref: '#/components/schemas/InternalServerException'
   schemas:
     User:
       type: object
@@ -748,7 +748,7 @@ components:
             - PATIENT
     Doctor:
       allOf:
-        - $ref: "#/components/schemas/User"
+        - $ref: '#/components/schemas/User'
       type: object
       properties:
         branch:
@@ -780,7 +780,7 @@ components:
             type: string
     Patient:
       allOf:
-        - $ref: "#/components/schemas/User"
+        - $ref: '#/components/schemas/User'
       type: object
       properties:
         doctorId:
@@ -801,10 +801,10 @@ components:
           type: object
           properties:
             schemas:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/User'
     Hospital:
       allOf:
-        - $ref: "#/components/schemas/Department"
+        - $ref: '#/components/schemas/Department'
       type: object
       properties:
         nif:
@@ -821,12 +821,12 @@ components:
         feedbacks:
           type: array
           items:
-            $ref: "#/components/schemas/Feedback"
+            $ref: '#/components/schemas/Feedback'
     Feedback:
       type: object
       properties:
         sender:
-          $ref: "#/components/schemas/Patient"
+          $ref: '#/components/schemas/Patient'
         comment:
           type: string
         score:
@@ -843,9 +843,9 @@ components:
         summary:
           type: string
         organizer:
-          $ref: "#/components/schemas/Doctor"
+          $ref: '#/components/schemas/Doctor'
         participant:
-          $ref: "#/components/schemas/Patient"
+          $ref: '#/components/schemas/Patient'
         from:
           type: string
           format: date-time
@@ -857,9 +857,9 @@ components:
       type: object
       properties:
         patient:
-          $ref: "#/components/schemas/Patient"
+          $ref: '#/components/schemas/Patient'
         patient_additional_info:
-          $ref: "#/components/schemas/PatientAdditionalInfo"
+          $ref: '#/components/schemas/PatientAdditionalInfo'
         continual_postoperative:
           type: object
           properties:
@@ -917,16 +917,16 @@ components:
           type: string
     BadRequestException:
       allOf:
-        - $ref: "#/components/schemas/Exception"
+        - $ref: '#/components/schemas/Exception'
     NotAuthorizedException:
       allOf:
-        - $ref: "#/components/schemas/Exception"
+        - $ref: '#/components/schemas/Exception'
     ResourceNotFoundException:
       allOf:
-        - $ref: "#/components/schemas/Exception"
+        - $ref: '#/components/schemas/Exception'
     TooManyRequestsException:
       allOf:
-        - $ref: "#/components/schemas/Exception"
+        - $ref: '#/components/schemas/Exception'
     InternalServerException:
       allOf:
-        - $ref: "#/components/schemas/Exception"
+        - $ref: '#/components/schemas/Exception'

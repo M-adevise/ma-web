@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Green Route API
- * This API provides access to the Green Route service.
+ * M-Advise
+ * This API provides access to the M-Advise service.
  *
  * The version of the OpenAPI document: latest
  *

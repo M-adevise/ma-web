@@ -60,4 +60,3 @@ export const RHFAutocompleteBackend = <T,>({ fetcher, getLabel, inputProps, name
     />
   );
 };
-

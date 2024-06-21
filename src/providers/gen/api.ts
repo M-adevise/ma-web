@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Green Route API
- * This API provides access to the Green Route service.
+ * M-Advise
+ * This API provides access to the M-Advise service.
  *
  * The version of the OpenAPI document: latest
  *
@@ -25,21 +25,51 @@ import { BASE_PATH, BaseAPI, RequiredError, operationServerMap } from './base';
 /**
  *
  * @export
- * @interface AuthenticationPayload
+ * @interface Appointment
  */
-export interface AuthenticationPayload {
+export interface Appointment {
   /**
    *
    * @type {string}
-   * @memberof AuthenticationPayload
+   * @memberof Appointment
    */
-  email?: string;
+  id?: string;
   /**
    *
    * @type {string}
-   * @memberof AuthenticationPayload
+   * @memberof Appointment
    */
-  provider_id?: string;
+  summary?: string;
+  /**
+   *
+   * @type {Doctor}
+   * @memberof Appointment
+   */
+  organizer?: Doctor;
+  /**
+   *
+   * @type {Patient}
+   * @memberof Appointment
+   */
+  participant?: Patient;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  from?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  to?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  roomId?: string;
 }
 /**
  *
@@ -63,6 +93,199 @@ export interface BadRequestException {
 /**
  *
  * @export
+ * @interface Channel
+ */
+export interface Channel {
+  /**
+   *
+   * @type {string}
+   * @memberof Channel
+   */
+  id?: string;
+  /**
+   * Identifier of the person who send the first message
+   * @type {string}
+   * @memberof Channel
+   */
+  creator?: string;
+  /**
+   * Identifier of the receiver
+   * @type {string}
+   * @memberof Channel
+   */
+  invited?: string;
+}
+/**
+ *
+ * @export
+ * @interface Department
+ */
+export interface Department {
+  /**
+   *
+   * @type {string}
+   * @memberof Department
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Department
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Department
+   */
+  contact?: string;
+  /**
+   *
+   * @type {DepartmentAdvisor}
+   * @memberof Department
+   */
+  advisor?: DepartmentAdvisor;
+}
+/**
+ *
+ * @export
+ * @interface DepartmentAdvisor
+ */
+export interface DepartmentAdvisor {
+  /**
+   *
+   * @type {User}
+   * @memberof DepartmentAdvisor
+   */
+  schemas?: User;
+}
+/**
+ *
+ * @export
+ * @interface Doctor
+ */
+export interface Doctor {
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  branch?: string;
+  /**
+   *
+   * @type {Department}
+   * @memberof Doctor
+   */
+  department?: Department;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  registryNumber?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  lastName?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  authenticationId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  firstName?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  nic?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  birthDate?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  email?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  photoId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  sex?: DoctorSexEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  contact?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  address?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  country?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  city?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Doctor
+   */
+  role?: DoctorRoleEnum;
+}
+
+export const DoctorSexEnum = {
+  Male: 'MALE',
+  Feminine: 'FEMININE',
+} as const;
+
+export type DoctorSexEnum = (typeof DoctorSexEnum)[keyof typeof DoctorSexEnum];
+export const DoctorRoleEnum = {
+  Advisor: 'ADVISOR',
+  Doctor: 'DOCTOR',
+  Patient: 'PATIENT',
+} as const;
+
+export type DoctorRoleEnum = (typeof DoctorRoleEnum)[keyof typeof DoctorRoleEnum];
+
+/**
+ *
+ * @export
  * @interface Exception
  */
 export interface Exception {
@@ -82,155 +305,145 @@ export interface Exception {
 /**
  *
  * @export
- * @interface Forecast
+ * @interface Feedback
  */
-export interface Forecast {
+export interface Feedback {
   /**
    *
-   * @type {ForecastLocation}
-   * @memberof Forecast
+   * @type {Patient}
+   * @memberof Feedback
    */
-  location?: ForecastLocation;
-  /**
-   *
-   * @type {Array<ForecastDay>}
-   * @memberof Forecast
-   */
-  forecast?: Array<ForecastDay>;
-}
-/**
- *
- * @export
- * @interface ForecastDay
- */
-export interface ForecastDay {
+  sender?: Patient;
   /**
    *
    * @type {string}
-   * @memberof ForecastDay
+   * @memberof Feedback
    */
-  date?: string;
+  comment?: string;
   /**
    *
-   * @type {ForecastDayDay}
-   * @memberof ForecastDay
-   */
-  day?: ForecastDayDay;
-}
-/**
- *
- * @export
- * @interface ForecastDayDay
- */
-export interface ForecastDayDay {
-  /**
-   * Temperature in Celsius multiply by 100
    * @type {number}
-   * @memberof ForecastDayDay
+   * @memberof Feedback
    */
-  max_temp?: number;
+  score?: number;
   /**
-   * Temperature in Celsius multiply by 100
+   *
+   * @type {string}
+   * @memberof Feedback
+   */
+  creationDatetime?: string;
+}
+/**
+ *
+ * @export
+ * @interface FeedbackSummary
+ */
+export interface FeedbackSummary {
+  /**
+   *
    * @type {number}
-   * @memberof ForecastDayDay
+   * @memberof FeedbackSummary
    */
-  min_temp?: number;
+  totalFeedbacks?: number;
   /**
    *
-   * @type {ForecastDayDayCondition}
-   * @memberof ForecastDayDay
+   * @type {number}
+   * @memberof FeedbackSummary
    */
-  condition?: ForecastDayDayCondition;
+  totalScore?: number;
+  /**
+   *
+   * @type {Array<Feedback>}
+   * @memberof FeedbackSummary
+   */
+  feedbacks?: Array<Feedback>;
 }
 /**
  *
  * @export
- * @interface ForecastDayDayCondition
+ * @interface GenerateToken200Response
  */
-export interface ForecastDayDayCondition {
+export interface GenerateToken200Response {
   /**
    *
    * @type {string}
-   * @memberof ForecastDayDayCondition
+   * @memberof GenerateToken200Response
    */
-  text?: string;
+  token?: string;
   /**
-   * icon link
-   * @type {string}
-   * @memberof ForecastDayDayCondition
+   * expiration date-time in seconds
+   * @type {number}
+   * @memberof GenerateToken200Response
    */
-  icon?: string;
+  expiresIn?: number;
 }
 /**
  *
  * @export
- * @interface ForecastLocation
+ * @interface GenerateTokenRequest
  */
-export interface ForecastLocation {
+export interface GenerateTokenRequest {
+  /**
+   *
+   * @type {number}
+   * @memberof GenerateTokenRequest
+   */
+  appId?: number;
   /**
    *
    * @type {string}
-   * @memberof ForecastLocation
+   * @memberof GenerateTokenRequest
+   */
+  appSecret?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GenerateTokenRequest
+   */
+  username?: string;
+}
+/**
+ *
+ * @export
+ * @interface Hospital
+ */
+export interface Hospital {
+  /**
+   *
+   * @type {string}
+   * @memberof Hospital
+   */
+  nif?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Hospital
+   */
+  stat?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Hospital
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Hospital
    */
   name?: string;
   /**
    *
    * @type {string}
-   * @memberof ForecastLocation
+   * @memberof Hospital
    */
-  region?: string;
+  contact?: string;
   /**
    *
-   * @type {string}
-   * @memberof ForecastLocation
+   * @type {DepartmentAdvisor}
+   * @memberof Hospital
    */
-  country?: string;
-}
-/**
- *
- * @export
- * @interface Fuel
- */
-export interface Fuel {
-  /**
-   *
-   * @type {string}
-   * @memberof Fuel
-   */
-  type?: FuelTypeEnum;
-}
-
-export const FuelTypeEnum = {
-  BioDiesel: 'BIO_DIESEL',
-  Diesel: 'DIESEL',
-  Ethanol: 'ETHANOL',
-  Gasoline: 'GASOLINE',
-  Electricity: 'ELECTRICITY',
-  NaturalGas: 'NATURAL_GAS',
-  BioBas: 'BIO_BAS',
-  FossilGas: 'FOSSIL_GAS',
-} as const;
-
-export type FuelTypeEnum = (typeof FuelTypeEnum)[keyof typeof FuelTypeEnum];
-
-/**
- *
- * @export
- * @interface GetForecastRequest
- */
-export interface GetForecastRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof GetForecastRequest
-   */
-  origin?: string;
-  /**
-   *
-   * @type {string}
-   * @memberof GetForecastRequest
-   */
-  destination?: string;
+  advisor?: DepartmentAdvisor;
 }
 /**
  *
@@ -254,52 +467,162 @@ export interface InternalServerException {
 /**
  *
  * @export
- * @interface Itinerary
+ * @interface MedicalInfo
  */
-export interface Itinerary {
+export interface MedicalInfo {
+  /**
+   *
+   * @type {Patient}
+   * @memberof MedicalInfo
+   */
+  patient?: Patient;
+  /**
+   *
+   * @type {PatientAdditionalInfo}
+   * @memberof MedicalInfo
+   */
+  patientAdditionalInfo?: PatientAdditionalInfo;
+  /**
+   *
+   * @type {Array<MedicalInfoContinualPostoperativeInner>}
+   * @memberof MedicalInfo
+   */
+  continualPostoperative?: Array<MedicalInfoContinualPostoperativeInner>;
+  /**
+   *
+   * @type {Array<MedicalInfoTreatmentInner>}
+   * @memberof MedicalInfo
+   */
+  treatment?: Array<MedicalInfoTreatmentInner>;
   /**
    *
    * @type {string}
-   * @memberof Itinerary
+   * @memberof MedicalInfo
    */
-  title?: string;
-  /**
-   *
-   * @type {ItineraryTransport}
-   * @memberof Itinerary
-   */
-  transport?: ItineraryTransport;
-  /**
-   *
-   * @type {ItineraryTransport}
-   * @memberof Itinerary
-   */
-  accommodation?: ItineraryTransport;
-  /**
-   *
-   * @type {string}
-   * @memberof Itinerary
-   */
-  travel_description?: string;
+  creationDatetime?: string;
 }
 /**
  *
  * @export
- * @interface ItineraryTransport
+ * @interface MedicalInfoContinualPostoperativeInner
  */
-export interface ItineraryTransport {
+export interface MedicalInfoContinualPostoperativeInner {
   /**
-   * Carbone footprint
-   * @type {number}
-   * @memberof ItineraryTransport
+   *
+   * @type {string}
+   * @memberof MedicalInfoContinualPostoperativeInner
    */
-  co2e?: number;
+  date?: string;
   /**
-   * Carbone footprint per person
-   * @type {number}
-   * @memberof ItineraryTransport
+   *
+   * @type {string}
+   * @memberof MedicalInfoContinualPostoperativeInner
    */
-  co2e_pp?: number;
+  parameterControl?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoContinualPostoperativeInner
+   */
+  care?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoContinualPostoperativeInner
+   */
+  medicines?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoContinualPostoperativeInner
+   */
+  followup?: string;
+}
+/**
+ *
+ * @export
+ * @interface MedicalInfoTreatmentInner
+ */
+export interface MedicalInfoTreatmentInner {
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  disease?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  stage?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  description?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  treatmentStart?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  treatmentEnd?: string;
+  /**
+   * hospital name
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  hospital?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicalInfoTreatmentInner
+   */
+  doctorName?: string;
+}
+/**
+ *
+ * @export
+ * @interface Message
+ */
+export interface Message {
+  /**
+   *
+   * @type {string}
+   * @memberof Message
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Message
+   */
+  senderId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Message
+   */
+  receiverId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Message
+   */
+  content?: string;
+  /**
+   *
+   * @type {File}
+   * @memberof Message
+   */
+  attachment?: File;
 }
 /**
  *
@@ -320,6 +643,171 @@ export interface NotAuthorizedException {
    */
   message?: string;
 }
+/**
+ *
+ * @export
+ * @interface Patient
+ */
+export interface Patient {
+  /**
+   * Current doctor
+   * @type {string}
+   * @memberof Patient
+   */
+  doctorId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  documentId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  lastName?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  authenticationId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  firstName?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  nic?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  birthDate?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  email?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  photoId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  sex?: PatientSexEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  contact?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  address?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  country?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  city?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Patient
+   */
+  role?: PatientRoleEnum;
+}
+
+export const PatientSexEnum = {
+  Male: 'MALE',
+  Feminine: 'FEMININE',
+} as const;
+
+export type PatientSexEnum = (typeof PatientSexEnum)[keyof typeof PatientSexEnum];
+export const PatientRoleEnum = {
+  Advisor: 'ADVISOR',
+  Doctor: 'DOCTOR',
+  Patient: 'PATIENT',
+} as const;
+
+export type PatientRoleEnum = (typeof PatientRoleEnum)[keyof typeof PatientRoleEnum];
+
+/**
+ *
+ * @export
+ * @interface PatientAdditionalInfo
+ */
+export interface PatientAdditionalInfo {
+  /**
+   *
+   * @type {string}
+   * @memberof PatientAdditionalInfo
+   */
+  profession?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PatientAdditionalInfo
+   */
+  educationLevel?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PatientAdditionalInfo
+   */
+  civilStatus?: PatientAdditionalInfoCivilStatusEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof PatientAdditionalInfo
+   */
+  bloodType?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof PatientAdditionalInfo
+   */
+  allergies?: Array<string>;
+}
+
+export const PatientAdditionalInfoCivilStatusEnum = {
+  Bachelor: 'BACHELOR',
+  Engaged: 'ENGAGED',
+  Married: 'MARRIED',
+  Other: 'OTHER',
+} as const;
+
+export type PatientAdditionalInfoCivilStatusEnum = (typeof PatientAdditionalInfoCivilStatusEnum)[keyof typeof PatientAdditionalInfoCivilStatusEnum];
+
 /**
  *
  * @export
@@ -361,67 +849,6 @@ export interface TooManyRequestsException {
 /**
  *
  * @export
- * @interface TravelDescription
- */
-export interface TravelDescription {
-  /**
-   *
-   * @type {string}
-   * @memberof TravelDescription
-   */
-  from?: string;
-  /**
-   *
-   * @type {string}
-   * @memberof TravelDescription
-   */
-  to?: string;
-  /**
-   *
-   * @type {number}
-   * @memberof TravelDescription
-   */
-  distance?: number;
-  /**
-   * How many persons are going to travel?
-   * @type {number}
-   * @memberof TravelDescription
-   */
-  people?: number;
-  /**
-   *
-   * @type {string}
-   * @memberof TravelDescription
-   */
-  accommodation_type?: TravelDescriptionAccommodationTypeEnum;
-  /**
-   * Number of nights, defaults to 1.
-   * @type {number}
-   * @memberof TravelDescription
-   */
-  nights?: number;
-  /**
-   *
-   * @type {Vehicle}
-   * @memberof TravelDescription
-   */
-  vehicle?: Vehicle;
-}
-
-export const TravelDescriptionAccommodationTypeEnum = {
-  Hotel: 'HOTEL',
-  Hostel: 'HOSTEL',
-  Tent: 'TENT',
-  Apartment: 'APARTMENT',
-  Room: 'ROOM',
-  RentedApartment: 'RENTED_APARTMENT',
-} as const;
-
-export type TravelDescriptionAccommodationTypeEnum = (typeof TravelDescriptionAccommodationTypeEnum)[keyof typeof TravelDescriptionAccommodationTypeEnum];
-
-/**
- *
- * @export
  * @interface User
  */
 export interface User {
@@ -436,31 +863,31 @@ export interface User {
    * @type {string}
    * @memberof User
    */
-  last_name?: string;
+  lastName?: string;
   /**
    *
    * @type {string}
    * @memberof User
    */
-  authentication_id?: string;
+  authenticationId?: string;
   /**
    *
    * @type {string}
    * @memberof User
    */
-  first_name?: string;
+  firstName?: string;
   /**
    *
    * @type {string}
    * @memberof User
    */
-  username?: string;
+  nic?: string;
   /**
    *
    * @type {string}
    * @memberof User
    */
-  birth_date?: string;
+  birthDate?: string;
   /**
    *
    * @type {string}
@@ -472,66 +899,1254 @@ export interface User {
    * @type {string}
    * @memberof User
    */
-  photo_id?: string;
-}
-/**
- *
- * @export
- * @interface Vehicle
- */
-export interface Vehicle {
+  photoId?: string;
   /**
    *
    * @type {string}
-   * @memberof Vehicle
+   * @memberof User
    */
-  type?: VehicleTypeEnum;
+  sex?: UserSexEnum;
   /**
    *
-   * @type {Fuel}
-   * @memberof Vehicle
+   * @type {string}
+   * @memberof User
    */
-  fuel?: Fuel;
+  contact?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  address?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  country?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  city?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof User
+   */
+  role?: UserRoleEnum;
 }
 
-export const VehicleTypeEnum = {
-  Bicycle: 'BICYCLE',
-  SmallCar: 'SMALL_CAR',
-  LargeCar: 'LARGE_CAR',
-  Bus: 'BUS',
-  Minivan: 'MINIVAN',
-  MotorHome: 'MOTOR_HOME',
-  FlightRegularEconomy: 'FLIGHT_REGULAR_ECONOMY',
-  FlightCharterEconomy: 'FLIGHT_CHARTER_ECONOMY',
-  Hiking: 'HIKING',
-  Kayak: 'KAYAK',
-  Tram: 'TRAM',
-  Subway: 'SUBWAY',
-  Ferry: 'FERRY',
-  Train: 'TRAIN',
-  Walking: 'WALKING',
+export const UserSexEnum = {
+  Male: 'MALE',
+  Feminine: 'FEMININE',
 } as const;
 
-export type VehicleTypeEnum = (typeof VehicleTypeEnum)[keyof typeof VehicleTypeEnum];
+export type UserSexEnum = (typeof UserSexEnum)[keyof typeof UserSexEnum];
+export const UserRoleEnum = {
+  Advisor: 'ADVISOR',
+  Doctor: 'DOCTOR',
+  Patient: 'PATIENT',
+} as const;
+
+export type UserRoleEnum = (typeof UserRoleEnum)[keyof typeof UserRoleEnum];
 
 /**
- *
+ * ActivityApi - axios parameter creator
  * @export
- * @interface Weather
  */
-export interface Weather {
+export const ActivityApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @summary Crupdate appointment
+     * @param {string} id
+     * @param {Appointment} [appointment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateAppointment: async (id: string, appointment?: Appointment, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('crupdateAppointment', 'id', id);
+      const localVarPath = `/appointments/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(appointment, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Crupdate a medical information
+     * @param {string} id
+     * @param {MedicalInfo} [medicalInfo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateMedicalInfo: async (id: string, medicalInfo?: MedicalInfo, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('crupdateMedicalInfo', 'id', id);
+      const localVarPath = `/patients/{id}/medicalInfo`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(medicalInfo, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get all appointments of a doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorAppointments: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getDoctorAppointments', 'id', id);
+      const localVarPath = `/doctors/{id}/appointments`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get feedbacks of a specific doctors
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorFeedbacks: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getDoctorFeedbacks', 'id', id);
+      const localVarPath = `/doctors/{id}/feedbacks`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get all appointments of a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientsAppointments: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getPatientsAppointments', 'id', id);
+      const localVarPath = `/patients/{id}/appointments`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Give feedback to a specific doctor
+     * @param {string} id
+     * @param {Feedback} [feedback]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    giveFeedBacks: async (id: string, feedback?: Feedback, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('giveFeedBacks', 'id', id);
+      const localVarPath = `/doctors/{id}/feedbacks`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(feedback, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Read an appointment
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    readAppointment: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('readAppointment', 'id', id);
+      const localVarPath = `/appointments/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Read medical information about a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    readMedicalInfo: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('readMedicalInfo', 'id', id);
+      const localVarPath = `/patients/{id}/medicalInfo`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * ActivityApi - functional programming interface
+ * @export
+ */
+export const ActivityApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = ActivityApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate appointment
+     * @param {string} id
+     * @param {Appointment} [appointment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateAppointment(
+      id: string,
+      appointment?: Appointment,
+      options?: RawAxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Appointment>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateAppointment(id, appointment, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.crupdateAppointment']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Crupdate a medical information
+     * @param {string} id
+     * @param {MedicalInfo} [medicalInfo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateMedicalInfo(id: string, medicalInfo?: MedicalInfo, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateMedicalInfo(id, medicalInfo, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.crupdateMedicalInfo']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get all appointments of a doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getDoctorAppointments(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Appointment>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctorAppointments(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.getDoctorAppointments']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get feedbacks of a specific doctors
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getDoctorFeedbacks(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FeedbackSummary>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctorFeedbacks(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.getDoctorFeedbacks']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get all appointments of a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPatientsAppointments(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Appointment>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPatientsAppointments(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.getPatientsAppointments']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Give feedback to a specific doctor
+     * @param {string} id
+     * @param {Feedback} [feedback]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async giveFeedBacks(id: string, feedback?: Feedback, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Feedback>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.giveFeedBacks(id, feedback, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.giveFeedBacks']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Read an appointment
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async readAppointment(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Appointment>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.readAppointment(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.readAppointment']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Read medical information about a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async readMedicalInfo(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.readMedicalInfo(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['ActivityApi.readMedicalInfo']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * ActivityApi - factory interface
+ * @export
+ */
+export const ActivityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = ActivityApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate appointment
+     * @param {string} id
+     * @param {Appointment} [appointment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateAppointment(id: string, appointment?: Appointment, options?: any): AxiosPromise<Appointment> {
+      return localVarFp.crupdateAppointment(id, appointment, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Crupdate a medical information
+     * @param {string} id
+     * @param {MedicalInfo} [medicalInfo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateMedicalInfo(id: string, medicalInfo?: MedicalInfo, options?: any): AxiosPromise<File> {
+      return localVarFp.crupdateMedicalInfo(id, medicalInfo, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get all appointments of a doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorAppointments(id: string, options?: any): AxiosPromise<Array<Appointment>> {
+      return localVarFp.getDoctorAppointments(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get feedbacks of a specific doctors
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorFeedbacks(id: string, options?: any): AxiosPromise<FeedbackSummary> {
+      return localVarFp.getDoctorFeedbacks(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get all appointments of a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientsAppointments(id: string, options?: any): AxiosPromise<Array<Appointment>> {
+      return localVarFp.getPatientsAppointments(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Give feedback to a specific doctor
+     * @param {string} id
+     * @param {Feedback} [feedback]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    giveFeedBacks(id: string, feedback?: Feedback, options?: any): AxiosPromise<Feedback> {
+      return localVarFp.giveFeedBacks(id, feedback, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Read an appointment
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    readAppointment(id: string, options?: any): AxiosPromise<Appointment> {
+      return localVarFp.readAppointment(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Read medical information about a patient
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    readMedicalInfo(id: string, options?: any): AxiosPromise<File> {
+      return localVarFp.readMedicalInfo(id, options).then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * ActivityApi - object-oriented interface
+ * @export
+ * @class ActivityApi
+ * @extends {BaseAPI}
+ */
+export class ActivityApi extends BaseAPI {
   /**
    *
-   * @type {Forecast}
-   * @memberof Weather
+   * @summary Crupdate appointment
+   * @param {string} id
+   * @param {Appointment} [appointment]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
    */
-  origin?: Forecast;
+  public crupdateAppointment(id: string, appointment?: Appointment, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .crupdateAppointment(id, appointment, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
   /**
    *
-   * @type {Forecast}
-   * @memberof Weather
+   * @summary Crupdate a medical information
+   * @param {string} id
+   * @param {MedicalInfo} [medicalInfo]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
    */
-  destination?: Forecast;
+  public crupdateMedicalInfo(id: string, medicalInfo?: MedicalInfo, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .crupdateMedicalInfo(id, medicalInfo, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get all appointments of a doctor
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public getDoctorAppointments(id: string, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .getDoctorAppointments(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get feedbacks of a specific doctors
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public getDoctorFeedbacks(id: string, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .getDoctorFeedbacks(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get all appointments of a patient
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public getPatientsAppointments(id: string, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .getPatientsAppointments(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Give feedback to a specific doctor
+   * @param {string} id
+   * @param {Feedback} [feedback]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public giveFeedBacks(id: string, feedback?: Feedback, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .giveFeedBacks(id, feedback, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Read an appointment
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public readAppointment(id: string, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .readAppointment(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Read medical information about a patient
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ActivityApi
+   */
+  public readMedicalInfo(id: string, options?: RawAxiosRequestConfig) {
+    return ActivityApiFp(this.configuration)
+      .readMedicalInfo(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * CommunicationApi - axios parameter creator
+ * @export
+ */
+export const CommunicationApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @summary Crupdate channel
+     * @param {string} id
+     * @param {Channel} [channel]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateChannel: async (id: string, channel?: Channel, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('crupdateChannel', 'id', id);
+      const localVarPath = `/channel/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(channel, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Crupdate a message for channel
+     * @param {string} id
+     * @param {string} mId
+     * @param {Message} [message]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateMessage: async (id: string, mId: string, message?: Message, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('crupdateMessage', 'id', id);
+      // verify required parameter 'mId' is not null or undefined
+      assertParamExists('crupdateMessage', 'mId', mId);
+      const localVarPath = `/channels/{id}/messages/{mId}`.replace(`{${'id'}}`, encodeURIComponent(String(id))).replace(`{${'mId'}}`, encodeURIComponent(String(mId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(message, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get user channels
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChannels: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getChannels', 'id', id);
+      const localVarPath = `/users/{id}/channels`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get channel\'s messages
+     * @param {string} id
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMessageByChannelId: async (id: string, page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getMessageByChannelId', 'id', id);
+      const localVarPath = `/channels/{id}/messages`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      if (page !== undefined) {
+        localVarQueryParameter['page'] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter['pageSize'] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * CommunicationApi - functional programming interface
+ * @export
+ */
+export const CommunicationApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = CommunicationApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate channel
+     * @param {string} id
+     * @param {Channel} [channel]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateChannel(id: string, channel?: Channel, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Channel>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateChannel(id, channel, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['CommunicationApi.crupdateChannel']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Crupdate a message for channel
+     * @param {string} id
+     * @param {string} mId
+     * @param {Message} [message]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateMessage(
+      id: string,
+      mId: string,
+      message?: Message,
+      options?: RawAxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Message>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateMessage(id, mId, message, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['CommunicationApi.crupdateMessage']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get user channels
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getChannels(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Channel>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getChannels(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['CommunicationApi.getChannels']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get channel\'s messages
+     * @param {string} id
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getMessageByChannelId(
+      id: string,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Message>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getMessageByChannelId(id, page, pageSize, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['CommunicationApi.getMessageByChannelId']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * CommunicationApi - factory interface
+ * @export
+ */
+export const CommunicationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = CommunicationApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate channel
+     * @param {string} id
+     * @param {Channel} [channel]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateChannel(id: string, channel?: Channel, options?: any): AxiosPromise<Channel> {
+      return localVarFp.crupdateChannel(id, channel, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Crupdate a message for channel
+     * @param {string} id
+     * @param {string} mId
+     * @param {Message} [message]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateMessage(id: string, mId: string, message?: Message, options?: any): AxiosPromise<Message> {
+      return localVarFp.crupdateMessage(id, mId, message, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get user channels
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChannels(id: string, options?: any): AxiosPromise<Array<Channel>> {
+      return localVarFp.getChannels(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get channel\'s messages
+     * @param {string} id
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMessageByChannelId(id: string, page?: number, pageSize?: number, options?: any): AxiosPromise<Array<Message>> {
+      return localVarFp.getMessageByChannelId(id, page, pageSize, options).then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * CommunicationApi - object-oriented interface
+ * @export
+ * @class CommunicationApi
+ * @extends {BaseAPI}
+ */
+export class CommunicationApi extends BaseAPI {
+  /**
+   *
+   * @summary Crupdate channel
+   * @param {string} id
+   * @param {Channel} [channel]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CommunicationApi
+   */
+  public crupdateChannel(id: string, channel?: Channel, options?: RawAxiosRequestConfig) {
+    return CommunicationApiFp(this.configuration)
+      .crupdateChannel(id, channel, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Crupdate a message for channel
+   * @param {string} id
+   * @param {string} mId
+   * @param {Message} [message]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CommunicationApi
+   */
+  public crupdateMessage(id: string, mId: string, message?: Message, options?: RawAxiosRequestConfig) {
+    return CommunicationApiFp(this.configuration)
+      .crupdateMessage(id, mId, message, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get user channels
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CommunicationApi
+   */
+  public getChannels(id: string, options?: RawAxiosRequestConfig) {
+    return CommunicationApiFp(this.configuration)
+      .getChannels(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get channel\'s messages
+   * @param {string} id
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CommunicationApi
+   */
+  public getMessageByChannelId(id: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+    return CommunicationApiFp(this.configuration)
+      .getMessageByChannelId(id, page, pageSize, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * DepartmentApi - axios parameter creator
+ * @export
+ */
+export const DepartmentApiAxiosParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     *
+     * @summary Crupdate hospital
+     * @param {Array<Hospital>} [hospital]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateHospital: async (hospital?: Array<Hospital>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/hospitals`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(hospital, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get list of doctors of a specific department
+     * @param {string} id hospital identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorsByHospitalsId: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getDoctorsByHospitalsId', 'id', id);
+      const localVarPath = `/department/{id}/doctors`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get list of hospitals
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getHospitals: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/hospitals`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * DepartmentApi - functional programming interface
+ * @export
+ */
+export const DepartmentApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = DepartmentApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate hospital
+     * @param {Array<Hospital>} [hospital]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateHospital(hospital?: Array<Hospital>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Hospital>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateHospital(hospital, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['DepartmentApi.crupdateHospital']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get list of doctors of a specific department
+     * @param {string} id hospital identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getDoctorsByHospitalsId(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Doctor>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctorsByHospitalsId(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['DepartmentApi.getDoctorsByHospitalsId']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get list of hospitals
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getHospitals(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Hospital>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getHospitals(options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['DepartmentApi.getHospitals']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * DepartmentApi - factory interface
+ * @export
+ */
+export const DepartmentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = DepartmentApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate hospital
+     * @param {Array<Hospital>} [hospital]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateHospital(hospital?: Array<Hospital>, options?: any): AxiosPromise<Array<Hospital>> {
+      return localVarFp.crupdateHospital(hospital, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get list of doctors of a specific department
+     * @param {string} id hospital identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctorsByHospitalsId(id: string, options?: any): AxiosPromise<Array<Doctor>> {
+      return localVarFp.getDoctorsByHospitalsId(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get list of hospitals
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getHospitals(options?: any): AxiosPromise<Array<Hospital>> {
+      return localVarFp.getHospitals(options).then(request => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * DepartmentApi - object-oriented interface
+ * @export
+ * @class DepartmentApi
+ * @extends {BaseAPI}
+ */
+export class DepartmentApi extends BaseAPI {
+  /**
+   *
+   * @summary Crupdate hospital
+   * @param {Array<Hospital>} [hospital]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DepartmentApi
+   */
+  public crupdateHospital(hospital?: Array<Hospital>, options?: RawAxiosRequestConfig) {
+    return DepartmentApiFp(this.configuration)
+      .crupdateHospital(hospital, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get list of doctors of a specific department
+   * @param {string} id hospital identifier
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DepartmentApi
+   */
+  public getDoctorsByHospitalsId(id: string, options?: RawAxiosRequestConfig) {
+    return DepartmentApiFp(this.configuration)
+      .getDoctorsByHospitalsId(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get list of hospitals
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DepartmentApi
+   */
+  public getHospitals(options?: RawAxiosRequestConfig) {
+    return DepartmentApiFp(this.configuration)
+      .getHospitals(options)
+      .then(request => request(this.axios, this.basePath));
+  }
 }
 
 /**
@@ -564,11 +2179,7 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
 
       return {
         url: toPathString(localVarUrlObj),
@@ -602,11 +2213,7 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
       localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
 
       return {
@@ -664,60 +2271,26 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
     /**
      *
      * @summary Retrieve file
-     * @param {FileApiDownloadFileRequest} requestParameters Request parameters.
+     * @param {string} fileId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    downloadFile(requestParameters: FileApiDownloadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-      return localVarFp.downloadFile(requestParameters.fileId, options).then(request => request(axios, basePath));
+    downloadFile(fileId: string, options?: any): AxiosPromise<File> {
+      return localVarFp.downloadFile(fileId, options).then(request => request(axios, basePath));
     },
     /**
      *
      * @summary Upload standard file
-     * @param {FileApiUploadFileRequest} requestParameters Request parameters.
+     * @param {string} fileId
+     * @param {File} [body]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadFile(requestParameters: FileApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-      return localVarFp.uploadFile(requestParameters.fileId, requestParameters.body, options).then(request => request(axios, basePath));
+    uploadFile(fileId: string, body?: File, options?: any): AxiosPromise<string> {
+      return localVarFp.uploadFile(fileId, body, options).then(request => request(axios, basePath));
     },
   };
 };
-
-/**
- * Request parameters for downloadFile operation in FileApi.
- * @export
- * @interface FileApiDownloadFileRequest
- */
-export interface FileApiDownloadFileRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof FileApiDownloadFile
-   */
-  readonly fileId: string;
-}
-
-/**
- * Request parameters for uploadFile operation in FileApi.
- * @export
- * @interface FileApiUploadFileRequest
- */
-export interface FileApiUploadFileRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof FileApiUploadFile
-   */
-  readonly fileId: string;
-
-  /**
-   *
-   * @type {File}
-   * @memberof FileApiUploadFile
-   */
-  readonly body?: File;
-}
 
 /**
  * FileApi - object-oriented interface
@@ -729,28 +2302,29 @@ export class FileApi extends BaseAPI {
   /**
    *
    * @summary Retrieve file
-   * @param {FileApiDownloadFileRequest} requestParameters Request parameters.
+   * @param {string} fileId
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FileApi
    */
-  public downloadFile(requestParameters: FileApiDownloadFileRequest, options?: RawAxiosRequestConfig) {
+  public downloadFile(fileId: string, options?: RawAxiosRequestConfig) {
     return FileApiFp(this.configuration)
-      .downloadFile(requestParameters.fileId, options)
+      .downloadFile(fileId, options)
       .then(request => request(this.axios, this.basePath));
   }
 
   /**
    *
    * @summary Upload standard file
-   * @param {FileApiUploadFileRequest} requestParameters Request parameters.
+   * @param {string} fileId
+   * @param {File} [body]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof FileApi
    */
-  public uploadFile(requestParameters: FileApiUploadFileRequest, options?: RawAxiosRequestConfig) {
+  public uploadFile(fileId: string, body?: File, options?: RawAxiosRequestConfig) {
     return FileApiFp(this.configuration)
-      .uploadFile(requestParameters.fileId, requestParameters.body, options)
+      .uploadFile(fileId, body, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
@@ -782,11 +2356,7 @@ export const HealthApiAxiosParamCreator = function (configuration?: Configuratio
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
 
       return {
         url: toPathString(localVarUrlObj),
@@ -831,7 +2401,7 @@ export const HealthApiFactory = function (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    ping(options?: RawAxiosRequestConfig): AxiosPromise<string> {
+    ping(options?: any): AxiosPromise<string> {
       return localVarFp.ping(options).then(request => request(axios, basePath));
     },
   };
@@ -859,227 +2429,43 @@ export class HealthApi extends BaseAPI {
 }
 
 /**
- * RouteApi - axios parameter creator
- * @export
- */
-export const RouteApiAxiosParamCreator = function (configuration?: Configuration) {
-  return {
-    /**
-     *
-     * @summary Eco-friendly itineraries according to travel description
-     * @param {TravelDescription} travelDescription
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    generateItineraries: async (travelDescription: TravelDescription, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      // verify required parameter 'travelDescription' is not null or undefined
-      assertParamExists('generateItineraries', 'travelDescription', travelDescription);
-      const localVarPath = `/itineraries`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarHeaderParameter['Content-Type'] = 'application/json';
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(travelDescription, localVarRequestOptions, configuration);
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     *
-     * @summary Get next 3 days forecast
-     * @param {GetForecastRequest} [getForecastRequest]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getForecast: async (getForecastRequest?: GetForecastRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/weathers`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      localVarHeaderParameter['Content-Type'] = 'application/json';
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(getForecastRequest, localVarRequestOptions, configuration);
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-  };
-};
-
-/**
- * RouteApi - functional programming interface
- * @export
- */
-export const RouteApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = RouteApiAxiosParamCreator(configuration);
-  return {
-    /**
-     *
-     * @summary Eco-friendly itineraries according to travel description
-     * @param {TravelDescription} travelDescription
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async generateItineraries(
-      travelDescription: TravelDescription,
-      options?: RawAxiosRequestConfig
-    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Itinerary>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.generateItineraries(travelDescription, options);
-      const index = configuration?.serverIndex ?? 0;
-      const operationBasePath = operationServerMap['RouteApi.generateItineraries']?.[index]?.url;
-      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
-    },
-    /**
-     *
-     * @summary Get next 3 days forecast
-     * @param {GetForecastRequest} [getForecastRequest]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async getForecast(getForecastRequest?: GetForecastRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Weather>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getForecast(getForecastRequest, options);
-      const index = configuration?.serverIndex ?? 0;
-      const operationBasePath = operationServerMap['RouteApi.getForecast']?.[index]?.url;
-      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
-    },
-  };
-};
-
-/**
- * RouteApi - factory interface
- * @export
- */
-export const RouteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-  const localVarFp = RouteApiFp(configuration);
-  return {
-    /**
-     *
-     * @summary Eco-friendly itineraries according to travel description
-     * @param {RouteApiGenerateItinerariesRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    generateItineraries(requestParameters: RouteApiGenerateItinerariesRequest, options?: RawAxiosRequestConfig): AxiosPromise<Itinerary> {
-      return localVarFp.generateItineraries(requestParameters.travelDescription, options).then(request => request(axios, basePath));
-    },
-    /**
-     *
-     * @summary Get next 3 days forecast
-     * @param {RouteApiGetForecastRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getForecast(requestParameters: RouteApiGetForecastRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<Weather> {
-      return localVarFp.getForecast(requestParameters.getForecastRequest, options).then(request => request(axios, basePath));
-    },
-  };
-};
-
-/**
- * Request parameters for generateItineraries operation in RouteApi.
- * @export
- * @interface RouteApiGenerateItinerariesRequest
- */
-export interface RouteApiGenerateItinerariesRequest {
-  /**
-   *
-   * @type {TravelDescription}
-   * @memberof RouteApiGenerateItineraries
-   */
-  readonly travelDescription: TravelDescription;
-}
-
-/**
- * Request parameters for getForecast operation in RouteApi.
- * @export
- * @interface RouteApiGetForecastRequest
- */
-export interface RouteApiGetForecastRequest {
-  /**
-   *
-   * @type {GetForecastRequest}
-   * @memberof RouteApiGetForecast
-   */
-  readonly getForecastRequest?: GetForecastRequest;
-}
-
-/**
- * RouteApi - object-oriented interface
- * @export
- * @class RouteApi
- * @extends {BaseAPI}
- */
-export class RouteApi extends BaseAPI {
-  /**
-   *
-   * @summary Eco-friendly itineraries according to travel description
-   * @param {RouteApiGenerateItinerariesRequest} requestParameters Request parameters.
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof RouteApi
-   */
-  public generateItineraries(requestParameters: RouteApiGenerateItinerariesRequest, options?: RawAxiosRequestConfig) {
-    return RouteApiFp(this.configuration)
-      .generateItineraries(requestParameters.travelDescription, options)
-      .then(request => request(this.axios, this.basePath));
-  }
-
-  /**
-   *
-   * @summary Get next 3 days forecast
-   * @param {RouteApiGetForecastRequest} requestParameters Request parameters.
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof RouteApi
-   */
-  public getForecast(requestParameters: RouteApiGetForecastRequest = {}, options?: RawAxiosRequestConfig) {
-    return RouteApiFp(this.configuration)
-      .getForecast(requestParameters.getForecastRequest, options)
-      .then(request => request(this.axios, this.basePath));
-  }
-}
-
-/**
  * SecurityApi - axios parameter creator
  * @export
  */
 export const SecurityApiAxiosParamCreator = function (configuration?: Configuration) {
   return {
+    /**
+     *
+     * @summary Generate token for a video call
+     * @param {GenerateTokenRequest} [generateTokenRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    generateToken: async (generateTokenRequest?: GenerateTokenRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/call/tokens`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(generateTokenRequest, localVarRequestOptions, configuration);
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
     /**
      *
      * @summary Login user.
@@ -1101,11 +2487,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
 
       return {
         url: toPathString(localVarUrlObj),
@@ -1138,11 +2520,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
       localVarRequestOptions.data = serializeDataIfNeeded(user, localVarRequestOptions, configuration);
 
       return {
@@ -1160,6 +2538,22 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
 export const SecurityApiFp = function (configuration?: Configuration) {
   const localVarAxiosParamCreator = SecurityApiAxiosParamCreator(configuration);
   return {
+    /**
+     *
+     * @summary Generate token for a video call
+     * @param {GenerateTokenRequest} [generateTokenRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async generateToken(
+      generateTokenRequest?: GenerateTokenRequest,
+      options?: RawAxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GenerateToken200Response>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.generateToken(generateTokenRequest, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['SecurityApi.generateToken']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
     /**
      *
      * @summary Login user.
@@ -1197,39 +2591,35 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
   return {
     /**
      *
+     * @summary Generate token for a video call
+     * @param {GenerateTokenRequest} [generateTokenRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    generateToken(generateTokenRequest?: GenerateTokenRequest, options?: any): AxiosPromise<GenerateToken200Response> {
+      return localVarFp.generateToken(generateTokenRequest, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
      * @summary Login user.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    signIn(options?: RawAxiosRequestConfig): AxiosPromise<User> {
+    signIn(options?: any): AxiosPromise<User> {
       return localVarFp.signIn(options).then(request => request(axios, basePath));
     },
     /**
      *
      * @summary Sign up user
-     * @param {SecurityApiSignUpRequest} requestParameters Request parameters.
+     * @param {User} user Sign up payload.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    signUp(requestParameters: SecurityApiSignUpRequest, options?: RawAxiosRequestConfig): AxiosPromise<User> {
-      return localVarFp.signUp(requestParameters.user, options).then(request => request(axios, basePath));
+    signUp(user: User, options?: any): AxiosPromise<User> {
+      return localVarFp.signUp(user, options).then(request => request(axios, basePath));
     },
   };
 };
-
-/**
- * Request parameters for signUp operation in SecurityApi.
- * @export
- * @interface SecurityApiSignUpRequest
- */
-export interface SecurityApiSignUpRequest {
-  /**
-   * Sign up payload.
-   * @type {User}
-   * @memberof SecurityApiSignUp
-   */
-  readonly user: User;
-}
 
 /**
  * SecurityApi - object-oriented interface
@@ -1238,6 +2628,20 @@ export interface SecurityApiSignUpRequest {
  * @extends {BaseAPI}
  */
 export class SecurityApi extends BaseAPI {
+  /**
+   *
+   * @summary Generate token for a video call
+   * @param {GenerateTokenRequest} [generateTokenRequest]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SecurityApi
+   */
+  public generateToken(generateTokenRequest?: GenerateTokenRequest, options?: RawAxiosRequestConfig) {
+    return SecurityApiFp(this.configuration)
+      .generateToken(generateTokenRequest, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
   /**
    *
    * @summary Login user.
@@ -1254,14 +2658,14 @@ export class SecurityApi extends BaseAPI {
   /**
    *
    * @summary Sign up user
-   * @param {SecurityApiSignUpRequest} requestParameters Request parameters.
+   * @param {User} user Sign up payload.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof SecurityApi
    */
-  public signUp(requestParameters: SecurityApiSignUpRequest, options?: RawAxiosRequestConfig) {
+  public signUp(user: User, options?: RawAxiosRequestConfig) {
     return SecurityApiFp(this.configuration)
-      .signUp(requestParameters.user, options)
+      .signUp(user, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
@@ -1274,12 +2678,16 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
   return {
     /**
      *
-     * @summary Get user activities history
+     * @summary Crupdate doctor
+     * @param {string} id
+     * @param {Doctor} [doctor]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getActivities: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-      const localVarPath = `/activities`;
+    crupdateDoctor: async (id: string, doctor?: Doctor, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('crupdateDoctor', 'id', id);
+      const localVarPath = `/doctors/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -1287,17 +2695,16 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         baseOptions = configuration.baseOptions;
       }
 
-      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(doctor, localVarRequestOptions, configuration);
 
       return {
         url: toPathString(localVarUrlObj),
@@ -1306,15 +2713,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     },
     /**
      *
-     * @summary Get user by identifier
+     * @summary Get doctors by identifier
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getUserById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+    getDoctorById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
-      assertParamExists('getUserById', 'id', id);
-      const localVarPath = `/users/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      assertParamExists('getDoctorById', 'id', id);
+      const localVarPath = `/doctors/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -1328,11 +2735,97 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
       };
+    },
+    /**
+     *
+     * @summary Get list of doctors
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctors: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/doctors`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get patient by identifier
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getPatientById', 'id', id);
+      const localVarPath = `/patients/{id}`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get patients of a specific doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientsByDoctorId: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('getPatientsByDoctorId', 'id', id);
+      const localVarPath = `/doctors/{id}/patients`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
 
       return {
         url: toPathString(localVarUrlObj),
@@ -1366,11 +2859,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
       localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
 
       return {
@@ -1390,27 +2879,67 @@ export const UserApiFp = function (configuration?: Configuration) {
   return {
     /**
      *
-     * @summary Get user activities history
+     * @summary Crupdate doctor
+     * @param {string} id
+     * @param {Doctor} [doctor]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getActivities(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Itinerary>>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(options);
+    async crupdateDoctor(id: string, doctor?: Doctor, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Doctor>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateDoctor(id, doctor, options);
       const index = configuration?.serverIndex ?? 0;
-      const operationBasePath = operationServerMap['UserApi.getActivities']?.[index]?.url;
+      const operationBasePath = operationServerMap['UserApi.crupdateDoctor']?.[index]?.url;
       return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
     },
     /**
      *
-     * @summary Get user by identifier
+     * @summary Get doctors by identifier
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getUserById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(id, options);
+    async getDoctorById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Doctor>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctorById(id, options);
       const index = configuration?.serverIndex ?? 0;
-      const operationBasePath = operationServerMap['UserApi.getUserById']?.[index]?.url;
+      const operationBasePath = operationServerMap['UserApi.getDoctorById']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get list of doctors
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getDoctors(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Doctor>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctors(options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['UserApi.getDoctors']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get patient by identifier
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPatientById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Patient>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPatientById(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['UserApi.getPatientById']?.[index]?.url;
+      return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get patients of a specific doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPatientsByDoctorId(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Patient>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPatientsByDoctorId(id, options);
+      const index = configuration?.serverIndex ?? 0;
+      const operationBasePath = operationServerMap['UserApi.getPatientsByDoctorId']?.[index]?.url;
       return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
     },
     /**
@@ -1439,70 +2968,67 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
   return {
     /**
      *
-     * @summary Get user activities history
+     * @summary Crupdate doctor
+     * @param {string} id
+     * @param {Doctor} [doctor]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getActivities(options?: RawAxiosRequestConfig): AxiosPromise<Array<Itinerary>> {
-      return localVarFp.getActivities(options).then(request => request(axios, basePath));
+    crupdateDoctor(id: string, doctor?: Doctor, options?: any): AxiosPromise<Doctor> {
+      return localVarFp.crupdateDoctor(id, doctor, options).then(request => request(axios, basePath));
     },
     /**
      *
-     * @summary Get user by identifier
-     * @param {UserApiGetUserByIdRequest} requestParameters Request parameters.
+     * @summary Get doctors by identifier
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getUserById(requestParameters: UserApiGetUserByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<User> {
-      return localVarFp.getUserById(requestParameters.id, options).then(request => request(axios, basePath));
+    getDoctorById(id: string, options?: any): AxiosPromise<Doctor> {
+      return localVarFp.getDoctorById(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get list of doctors
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getDoctors(options?: any): AxiosPromise<Array<Doctor>> {
+      return localVarFp.getDoctors(options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get patient by identifier
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientById(id: string, options?: any): AxiosPromise<Patient> {
+      return localVarFp.getPatientById(id, options).then(request => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get patients of a specific doctor
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPatientsByDoctorId(id: string, options?: any): AxiosPromise<Array<Patient>> {
+      return localVarFp.getPatientsByDoctorId(id, options).then(request => request(axios, basePath));
     },
     /**
      *
      * @summary Update user photo
-     * @param {UserApiUpdateProfilePicRequest} requestParameters Request parameters.
+     * @param {string} id
+     * @param {File} [body]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateProfilePic(requestParameters: UserApiUpdateProfilePicRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-      return localVarFp.updateProfilePic(requestParameters.id, requestParameters.body, options).then(request => request(axios, basePath));
+    updateProfilePic(id: string, body?: File, options?: any): AxiosPromise<string> {
+      return localVarFp.updateProfilePic(id, body, options).then(request => request(axios, basePath));
     },
   };
 };
-
-/**
- * Request parameters for getUserById operation in UserApi.
- * @export
- * @interface UserApiGetUserByIdRequest
- */
-export interface UserApiGetUserByIdRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof UserApiGetUserById
-   */
-  readonly id: string;
-}
-
-/**
- * Request parameters for updateProfilePic operation in UserApi.
- * @export
- * @interface UserApiUpdateProfilePicRequest
- */
-export interface UserApiUpdateProfilePicRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof UserApiUpdateProfilePic
-   */
-  readonly id: string;
-
-  /**
-   *
-   * @type {File}
-   * @memberof UserApiUpdateProfilePic
-   */
-  readonly body?: File;
-}
 
 /**
  * UserApi - object-oriented interface
@@ -1513,42 +3039,86 @@ export interface UserApiUpdateProfilePicRequest {
 export class UserApi extends BaseAPI {
   /**
    *
-   * @summary Get user activities history
+   * @summary Crupdate doctor
+   * @param {string} id
+   * @param {Doctor} [doctor]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public getActivities(options?: RawAxiosRequestConfig) {
+  public crupdateDoctor(id: string, doctor?: Doctor, options?: RawAxiosRequestConfig) {
     return UserApiFp(this.configuration)
-      .getActivities(options)
+      .crupdateDoctor(id, doctor, options)
       .then(request => request(this.axios, this.basePath));
   }
 
   /**
    *
-   * @summary Get user by identifier
-   * @param {UserApiGetUserByIdRequest} requestParameters Request parameters.
+   * @summary Get doctors by identifier
+   * @param {string} id
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public getUserById(requestParameters: UserApiGetUserByIdRequest, options?: RawAxiosRequestConfig) {
+  public getDoctorById(id: string, options?: RawAxiosRequestConfig) {
     return UserApiFp(this.configuration)
-      .getUserById(requestParameters.id, options)
+      .getDoctorById(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get list of doctors
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public getDoctors(options?: RawAxiosRequestConfig) {
+    return UserApiFp(this.configuration)
+      .getDoctors(options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get patient by identifier
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public getPatientById(id: string, options?: RawAxiosRequestConfig) {
+    return UserApiFp(this.configuration)
+      .getPatientById(id, options)
+      .then(request => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get patients of a specific doctor
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public getPatientsByDoctorId(id: string, options?: RawAxiosRequestConfig) {
+    return UserApiFp(this.configuration)
+      .getPatientsByDoctorId(id, options)
       .then(request => request(this.axios, this.basePath));
   }
 
   /**
    *
    * @summary Update user photo
-   * @param {UserApiUpdateProfilePicRequest} requestParameters Request parameters.
+   * @param {string} id
+   * @param {File} [body]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public updateProfilePic(requestParameters: UserApiUpdateProfilePicRequest, options?: RawAxiosRequestConfig) {
+  public updateProfilePic(id: string, body?: File, options?: RawAxiosRequestConfig) {
     return UserApiFp(this.configuration)
-      .updateProfilePic(requestParameters.id, requestParameters.body, options)
+      .updateProfilePic(id, body, options)
       .then(request => request(this.axios, this.basePath));
   }
 }
