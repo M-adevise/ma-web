@@ -14,16 +14,14 @@ export const RHFInput: FC<RHFInputProps> = ({ name, ...props }) => {
   } = useFormContext();
 
   const translate = useTranslate();
-
   const error = errors[name];
-
   const { resource } = useResource();
 
   return (
     <TextField
       {...props}
       {...register(name)}
-      label={translate(`inputs.${resource?.name}.${name}`)}
+      label={translate(`${resource?.name}.inputs.${name}`)}
       error={!!error}
       helperText={(error && (error.message as string)) || ''}
       size='small'

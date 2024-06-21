@@ -1,13 +1,4 @@
 {
-  "inputs": {
-    "appointments": {
-      "summary": "Description",
-      "end": "Date de fin",
-      "start": "Date de début",
-      "organizer": "Organisateur",
-      "participant": "Participant"
-    }
-  },
   "pages": {
     "login": {
       "title": "Connectez-vous à votre compte",
@@ -443,6 +434,15 @@
     "actions": {
       "add": "Ajouter un utilisateur",
       "edit": "Éditer l'utilisateur"
+    }
+  },
+  "appointments": {
+    "inputs": {
+      "summary": "Description",
+      "end": "Date de fin",
+      "start": "Date de début",
+      "organizer": "Organisateur",
+      "participant": "Participant"
     }
   }
 }

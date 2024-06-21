@@ -1,8 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import axios from 'axios';
 import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useCalendarEventForm } from '../../common/resolver';
-import { RHFInput } from '../../components';
+import { RHFAutocompleteBackend, RHFInput } from '../../components';
 import { EditEventDialogProps } from './types';
 
 const DateTimeLocalProps = {
@@ -23,6 +24,11 @@ export const EditEventDialog: FC<EditEventDialogProps> = ({ event, isOpen, close
           <RHFInput name='summary' multiline minRows={4} autoFocus margin='dense' fullWidth label='Event Title' />
           <RHFInput InputLabelProps={DateTimeLocalProps} name='start' autoFocus margin='dense' fullWidth label='Start Date' type='datetime-local' />
           <RHFInput InputLabelProps={DateTimeLocalProps} name='end' autoFocus margin='dense' fullWidth label='End Date' type='datetime-local' />
+          <RHFAutocompleteBackend<any>
+            name='participant'
+            getLabel={option => (option as any).title}
+            fetcher={async (input: string) => (await axios.get('https://dummyjson.com/products/search?q=' + input)).data.products}
+          />
         </FormProvider>
       </DialogContent>
       <DialogActions>
