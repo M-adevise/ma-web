@@ -2,7 +2,7 @@ import { fileApi } from './api';
 
 export const fileProvider = {
   downloadFile: async (fileId: string) => {
-    const { data } = await fileApi().downloadFile({ fileId });
+    const { data } = await fileApi().downloadFile(fileId);
     return data;
   },
   getUrl(fileId: string) {

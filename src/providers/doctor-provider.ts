@@ -1,20 +1,24 @@
 import { departmentApi, userApi } from './api';
 import { Doctor } from './gen';
+import { ProviderType } from './types';
 
-export const doctorProvider = {
-  async getAll() {
+export const doctorProvider: ProviderType<Doctor, Doctor> = {
+  getAllBy: async function (params) {
+    if (params.hospitalId) {
+      const { data } = await departmentApi().getDoctorsByHospitalsId(params.hospitalId);
+      return data;
+    }
     const { data } = await userApi().getDoctors();
     return data;
   },
-  async getOne(doctorId: string) {
-    const { data } = await userApi().getDoctorById(doctorId);
-    return data;
+  getOneBy: async function (params) {
+    if (params.doctorId) {
+      const { data } = await userApi().getDoctorById(params.doctorId);
+      return data;
+    }
+    throw new Error('doctorProvider.getOneBy no id was provided');
   },
-  async getAllByHospitalId(hospitalId: string) {
-    const { data } = await departmentApi().getDoctorsByHospitalsId(hospitalId);
-    return data;
-  },
-  async crupdate(doctorId: string, doctor: Doctor) {
+  crupdate: async function (doctorId, doctor) {
     const { data } = await userApi().crupdateDoctor(doctorId, doctor);
     return data;
   },

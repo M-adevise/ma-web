@@ -1,41 +1,62 @@
-import {
-  BaseRecord,
-  CreateParams,
-  CreateResponse,
-  DataProvider,
-  DeleteOneParams,
-  DeleteOneResponse,
-  GetListParams,
-  GetListResponse,
-  GetOneParams,
-  GetOneResponse,
-  UpdateParams,
-  UpdateResponse,
-} from '@refinedev/core';
-import { userProvider } from './user-provider';
+import { BaseRecord, DataProvider, DeleteOneParams, DeleteOneResponse } from '@refinedev/core';
+import { appointmentProvider } from './appointment-provider';
+import { doctorProvider } from './doctor-provider';
+import { feedbackProvider } from './feedback-provider';
+import { hospitalProvider } from './hospital-provider';
+import { medicalInfoProvider } from './medical-info-provider';
+import { patientProvider } from './patient-provider';
+import { ProviderType } from './types';
+
+const getProvider = (resource: string): ProviderType<any, any> => {
+  switch (resource) {
+    case 'appointments':
+      return appointmentProvider;
+    case 'doctors':
+      return doctorProvider;
+    case 'feedbacks':
+      return feedbackProvider;
+    case 'hospitals':
+      return hospitalProvider;
+    case 'medical-info':
+      return medicalInfoProvider;
+    case 'patients':
+      return patientProvider;
+    default:
+      throw new Error('Unknown provider');
+  }
+};
 
 export const dataProvider: DataProvider = {
-  getList: async function <TData extends BaseRecord = BaseRecord>({ resource }: GetListParams): Promise<GetListResponse<TData>> {
-    const res = await userProvider.getActivities();
-    switch (resource) {
-      case 'activities':
-        return {
-          data: res as any,
-          total: res.length,
-        };
-
-      default:
-        throw new Error('Function not implemented.');
+  getList: async function ({ resource, filters, meta = {} }) {
+    const provider = getProvider(resource);
+    const params: any = {};
+    if (meta.by) {
+      params[meta.by] = meta.id;
     }
+    const data = await provider.getAllBy(params);
+    return {
+      data,
+      total: 0,
+    };
   },
-  getOne: function <TData extends BaseRecord = BaseRecord>(params: GetOneParams): Promise<GetOneResponse<TData>> {
-    throw new Error('Function not implemented.');
+  getOne: async function ({ resource, id, meta = {} }) {
+    const provider = getProvider(resource);
+    const params: any = {};
+    if (meta.by) {
+      params[meta.by] = id;
+    }
+    const data = await provider.getOneBy(params);
+    return { data };
   },
-  create: function <TData extends BaseRecord = BaseRecord, TVariables = {}>(params: CreateParams<TVariables>): Promise<CreateResponse<TData>> {
-    throw new Error('Function not implemented.');
+  create: async function ({ resource, variables, meta }) {
+    const provider = getProvider(resource);
+    const data = await provider.crupdate(meta?.id, variables);
+    return { data };
   },
-  update: function <TData extends BaseRecord = BaseRecord, TVariables = {}>(params: UpdateParams<TVariables>): Promise<UpdateResponse<TData>> {
-    throw new Error('Function not implemented.');
+  update: async function ({ resource, variables, meta }) {
+    const provider = getProvider(resource);
+    const data = await provider.crupdate(meta?.id, variables);
+    return { data };
   },
   deleteOne: function <TData extends BaseRecord = BaseRecord, TVariables = {}>(params: DeleteOneParams<TVariables>): Promise<DeleteOneResponse<TData>> {
     throw new Error('Function not implemented.');

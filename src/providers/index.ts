@@ -10,3 +10,4 @@ export * from './gen';
 export * from './hospital-provider';
 export * from './medical-info-provider';
 export * from './patient-provider';
+export * from './types';
