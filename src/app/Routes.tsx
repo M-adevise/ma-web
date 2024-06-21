@@ -9,7 +9,7 @@ import { CalendarPage } from '../pages/appointements';
 import { AssistancePage } from '../pages/assistance';
 import { AuthPage } from '../pages/auth';
 import { CallPage } from '../pages/call';
-import { Chat } from '../pages/chat';
+import { Chat, ChatContactList } from '../pages/chat';
 import { MessageList } from '../pages/inbox';
 import { PatientList } from '../pages/patients';
 import { ProfilePage } from '../pages/profile';
@@ -37,7 +37,8 @@ export const AppRoute = () => {
             </PatientList>
           }></Route>
 
-        <Route path='/chat' element={<Chat />} />
+        <Route path='/chat' element={<ChatContactList />} />
+        <Route path='/chat/:contactId' element={<Chat />} />
         <Route path='/appointments' element={<CalendarPage />} />
         <Route path='/assistance' element={<AssistancePage />} />
         <Route path='/profile' element={<ProfilePage />} />
