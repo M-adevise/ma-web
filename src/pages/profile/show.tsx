@@ -4,10 +4,31 @@ import { blue, green, pink, red } from '@mui/material/colors';
 import { FC } from 'react';
 import img from '../../assets/logo.png';
 import { RefineListView } from '../../components';
+import { UserProfile } from './PatientProfile';
+
+const user = {
+  id: '123456',
+  lastName: 'Doe',
+  authenticationId: 'auth123',
+  firstName: 'John',
+  nic: '987654321',
+  birthDate: '1990-01-01T00:00:00.000Z',
+  email: 'john.doe@example.com',
+  photoId: '/path/to/photo.jpg',
+  sex: 'MALE',
+  contact: '+1234567890',
+  address: '1234 Main St',
+  country: 'USA',
+  city: 'New York',
+  role: 'ADVISOR',
+  doctorId: 'doc123',
+  documentId: 'doc567',
+};
 
 export const ProfilePage: FC<{}> = () => {
   return (
     <RefineListView>
+      <UserProfile user={user} />
       <Paper
         sx={{
           height: 450,
