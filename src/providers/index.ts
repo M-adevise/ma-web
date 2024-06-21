@@ -7,5 +7,6 @@ export * from './doctor-provider';
 export * from './feedback-provider';
 export * from './file-provider';
 export * from './gen';
+export * from './hospital-provider';
 export * from './medical-info-provider';
 export * from './patient-provider';
