@@ -1,9 +1,6 @@
 import { AuthProvider } from '@refinedev/core';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import { v4 } from 'uuid';
 import { cache, clearCached, getCached } from '../utils';
 import { securityApi, userApi } from './api';
-import { auth } from './firebase-conf';
 import { Configuration } from './gen';
 
 export const authProvider: AuthProvider & {
@@ -32,20 +29,6 @@ export const authProvider: AuthProvider & {
   },
   async register({ email, password }) {
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
-      const token = await result?.user?.getIdToken();
-      const firebaseUser = result.user;
-      cache.token(token);
-      const { data: user } = await securityApi().signUp({
-        user: {
-          id: v4(),
-          authentication_id: firebaseUser.uid,
-          email: firebaseUser.email || '',
-          photo_id: firebaseUser.photoURL || '',
-          username: firebaseUser.displayName || '',
-        },
-      });
-      cache.user(user);
       return {
         success: true,
         redirectTo: '/',
@@ -62,9 +45,6 @@ export const authProvider: AuthProvider & {
   },
   async login({ email, password }) {
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      const token = await result?.user?.getIdToken();
-      cache.token(token);
       const { data: user } = await securityApi().signIn();
       cache.user(user);
       return {
@@ -84,7 +64,6 @@ export const authProvider: AuthProvider & {
   async logout() {
     clearCached.token();
     clearCached.user();
-    signOut(auth);
     return {
       success: true,
       redirectTo: '/login',
@@ -100,14 +79,6 @@ export const authProvider: AuthProvider & {
     return { error };
   },
   async loginGoogle() {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account ',
-    });
-    const { user } = await signInWithPopup(auth, provider);
-    const token = await user?.getIdToken();
-    cache.token(token);
-
     try {
       const { data } = await securityApi().signIn();
       cache.user(data);
@@ -116,10 +87,6 @@ export const authProvider: AuthProvider & {
         redirectTo: '/',
       };
     } catch (err) {
-      const { data } = await securityApi().signUp({
-        user: { email: user.email || '', authentication_id: user.uid },
-      });
-      cache.user(data);
       return {
         success: true,
         redirectTo: '/',
