@@ -11,7 +11,13 @@ export interface EditEventDialogProps {
   close: () => void;
 }
 
+export interface CrupdateEventProps {
+  event: CalendarEvent;
+  onSave?: (event: CalendarEvent) => void;
+}
+
 export interface EditEventDialogState {
-  isOpen: boolean;
+  isDialogOpen: boolean;
+  isDrawerOpen: boolean;
   event: CalendarEvent | null;
 }
