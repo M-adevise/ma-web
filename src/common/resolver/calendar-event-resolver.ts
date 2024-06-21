@@ -16,9 +16,9 @@ const validateDate = (dateInString: string) => {
 
 const calendarEventValidator = z.object({
   id: z.string(),
-  title: z.string().min(4),
   start: customDateValidator(),
   end: customDateValidator(),
+  summary: z.string().min(4),
 });
 
 const calendarEventResolver = zodResolver(calendarEventValidator);

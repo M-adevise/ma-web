@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material';
+import { useResource, useTranslate } from '@refinedev/core';
 import { ComponentProps, FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -12,7 +13,20 @@ export const RHFInput: FC<RHFInputProps> = ({ name, ...props }) => {
     formState: { errors },
   } = useFormContext();
 
+  const translate = useTranslate();
+
   const error = errors[name];
 
-  return <TextField {...props} {...register(name)} error={!!error} helperText={(error && (error.message as string)) || ''} size='small' />;
+  const { resource } = useResource();
+
+  return (
+    <TextField
+      {...props}
+      {...register(name)}
+      label={translate(`inputs.${resource?.name}.${name}`)}
+      error={!!error}
+      helperText={(error && (error.message as string)) || ''}
+      size='small'
+    />
+  );
 };

@@ -1,0 +1,932 @@
+openapi: 3.0.3
+info:
+  version: "latest"
+  title: M-Advise
+  description: This API provides access to the M-Advise service.
+servers:
+  - url: "http://localhost:8080"
+
+paths:
+  /ping:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      operationId: ping
+      security: []
+      description: Check server health
+      responses:
+        200:
+          description: pong
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+        500:
+          $ref: "#/components/responses/500"
+
+  /signin:
+    post:
+      tags:
+        - Security
+      summary: Login user.
+      operationId: signIn
+      security: []
+      responses:
+        "201":
+          description: Logged in payload.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /signup:
+    post:
+      tags:
+        - Security
+      summary: Sign up user
+      operationId: signUp
+      security: []
+      requestBody:
+        description: Sign up payload.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: Signed up user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /call/tokens:
+    post:
+      tags:
+        - Security
+      summary: Generate token for a video call
+      operationId: generateToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appId:
+                  type: integer
+                appSecret:
+                  type: string
+                username:
+                  type: string
+      responses:
+        "200":
+          description: Generated token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  expiresIn:
+                    type: integer
+                    description: expiration date-time in seconds
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors:
+    get:
+      tags:
+        - User
+      summary: Get list of doctors
+      operationId: getDoctors
+      security: []
+      responses:
+        "200":
+          description: Required doctor
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Doctor"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors/{id}/feedbacks:
+    get:
+      tags:
+        - Activity
+      summary: Get feedbacks of a specific doctors
+      operationId: getDoctorFeedbacks
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Feedbacks
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackSummary"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Give feedback to a specific doctor
+      operationId: giveFeedBacks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Feedback"
+      responses:
+        "200":
+          description: Feedback
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feedback"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /appointments/{id}:
+    get:
+      tags:
+        - Activity
+      summary: Read an appointment
+      operationId: readAppointment
+      security: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The appointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Crupdate appointment
+      operationId: crupdateAppointment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Appointment"
+      responses:
+        "200":
+          description: The appointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors/{id}/appointments:
+    get:
+      tags:
+        - Activity
+      summary: Get all appointments of a doctor
+      operationId: getDoctorAppointments
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /patients/{id}/appointments:
+    get:
+      tags:
+        - Activity
+      summary: Get all appointments of a patient
+      operationId: getPatientsAppointments
+      security: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /doctors/{id}:
+    get:
+      tags:
+        - User
+      summary: Get doctors by identifier
+      operationId: getDoctorById
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Required doctor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - User
+      summary: Crupdate doctor
+      operationId: crupdateDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+      responses:
+        "200":
+          description: Crupdated doctor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /doctors/{id}/patients:
+    get:
+      tags:
+        - User
+      summary: Get patients of a specific doctor
+      operationId: getPatientsByDoctorId
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /patients/{id}:
+    get:
+      tags:
+        - User
+      summary: Get patient by identifier
+      operationId: getPatientById
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Required patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+  /users/{id}/raw:
+    post:
+      tags:
+        - User
+      summary: Update user photo
+      operationId: updateProfilePic
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          image/*:
+            schema:
+              type: string
+              format: binary
+      responses:
+        200:
+          description: File key
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: photo.png
+        500:
+          $ref: "#/components/responses/500"
+
+  /patients/{id}/medical_info:
+    get:
+      tags:
+        - Activity
+      summary: Read medical information about a patient
+      operationId: readMedicalInfo
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Activity
+      summary: Crupdate a medical information
+      operationId: crupdateMedicalInfo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInfo"
+      responses:
+        "200":
+          description: The document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /hospitals:
+    get:
+      tags:
+        - Department
+      summary: Get list of hospitals
+      operationId: getHospitals
+      security: []
+      responses:
+        200:
+          description: List of hospital
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Hospital"
+        500:
+          $ref: "#/components/responses/500"
+    put:
+      tags:
+        - Department
+      summary: Crupdate hospital
+      operationId: crupdateHospital
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Hospital"
+      responses:
+        200:
+          description: File key
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Hospital"
+        500:
+          $ref: "#/components/responses/500"
+
+  /department/{id}/doctors:
+    get:
+      tags:
+        - Department
+      summary: Get list of doctors of a specific department
+      operationId: getDoctorsByHospitalsId
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: hospital identifier
+      security: []
+      responses:
+        "200":
+          description: List of doctors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Doctor"
+        "500":
+          $ref: "#/components/responses/500"
+  /raw/{fileId}:
+    post:
+      tags:
+        - File
+      summary: Upload standard file
+      operationId: uploadFile
+      security: []
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          image/*:
+            schema:
+              type: string
+              format: binary
+      responses:
+        200:
+          description: File key
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: photo.png
+        500:
+          $ref: "#/components/responses/500"
+    get:
+      tags:
+        - File
+      summary: Retrieve file
+      operationId: downloadFile
+      security: []
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The required file
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        500:
+          $ref: "#/components/responses/500"
+
+components:
+  responses:
+    400:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestException"
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotAuthorizedException"
+    404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceNotFoundException"
+    429:
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsException"
+    500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InternalServerException"
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        last_name:
+          type: string
+        authentication_id:
+          type: string
+        first_name:
+          type: string
+        nic:
+          type: string
+        birth_date:
+          type: string
+          format: date-time
+        email:
+          type: string
+        photo_id:
+          type: string
+        sex:
+          type: string
+          enum:
+            - MALE
+            - FEMININE
+        contact:
+          type: string
+        address:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        role:
+          type: string
+          enum:
+            - ADVISOR
+            - DOCTOR
+            - PATIENT
+    Doctor:
+      allOf:
+        - $ref: "#/components/schemas/User"
+      type: object
+      properties:
+        branch:
+          type: string
+        department:
+          $ref: '#/components/schemas/Department'
+        registry_number:
+          type: string
+
+    PatientAdditionalInfo:
+      type: object
+      properties:
+        profession:
+          type: string
+        education_level:
+          type: string
+        civil_status:
+          type: string
+          enum:
+            - BACHELOR
+            - ENGAGED
+            - MARRIED
+            - OTHER
+        blood_type:
+          type: string
+        allergies:
+          type: array
+          items:
+            type: string
+    Patient:
+      allOf:
+        - $ref: "#/components/schemas/User"
+      type: object
+      properties:
+        doctorId:
+          type: string
+          description: Current doctor
+        documentId:
+          type: string
+    Department:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        contact:
+          type: string
+        advisor:
+          type: object
+          properties:
+            schemas:
+              $ref: "#/components/schemas/User"
+    Hospital:
+      allOf:
+        - $ref: "#/components/schemas/Department"
+      type: object
+      properties:
+        nif:
+          type: string
+        stat:
+          type: string
+    FeedbackSummary:
+      type: object
+      properties:
+        total_feedbacks:
+          type: integer
+        total_score:
+          type: integer
+        feedbacks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Feedback"
+    Feedback:
+      type: object
+      properties:
+        sender:
+          $ref: "#/components/schemas/Patient"
+        comment:
+          type: string
+        score:
+          type: integer
+        creation_datetime:
+          type: string
+          format: 'date-time'
+
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+        summary:
+          type: string
+        organizer:
+          $ref: "#/components/schemas/Doctor"
+        participant:
+          $ref: "#/components/schemas/Patient"
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+
+    MedicalInfo:
+      type: object
+      properties:
+        patient:
+          $ref: "#/components/schemas/Patient"
+        patient_additional_info:
+          $ref: "#/components/schemas/PatientAdditionalInfo"
+        continual_postoperative:
+          type: object
+          properties:
+            date:
+              type: string
+              format: 'date-time'
+            parameter_control:
+              type: string
+            care:
+              type: string
+            medicines:
+              type: string
+            followup:
+              type: string
+
+        treatment:
+          type: array
+          items:
+            type: object
+            properties:
+              disease:
+                type: string
+              stage:
+                type: string
+              description:
+                type: string
+              treatment_start:
+                type: string
+                format: 'date-time'
+              treatment_end:
+                type: string
+                format: 'date-time'
+              hospital:
+                type: string
+                description: hospital name
+              date:
+                type: string
+                format: 'date-time'
+        creation_datetime:
+          type: string
+          format: 'date-time'
+
+    Page:
+      type: integer
+      description: Start at `1`
+    PageSize:
+      type: integer
+      description: Cannot exceed `500`
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+      allOf:
+        - $ref: "#/components/schemas/Exception"
+    NotAuthorizedException:
+      allOf:
+        - $ref: "#/components/schemas/Exception"
+    ResourceNotFoundException:
+      allOf:
+        - $ref: "#/components/schemas/Exception"
+    TooManyRequestsException:
+      allOf:
+        - $ref: "#/components/schemas/Exception"
+    InternalServerException:
+      allOf:
+        - $ref: "#/components/schemas/Exception"

@@ -14,15 +14,14 @@ export const CalendarPage: FC = () => {
 
   const handleToggleEditEventDialog = () => setEditEventDialogState(prevState => ({ ...prevState, isOpen: !prevState.isOpen }));
 
-  const handleSelectEvent = (event: CalendarEvent, e: React.SyntheticEvent<HTMLElement, Event>) => {
+  const handleSelectEvent = (event: CalendarEvent, _event: React.SyntheticEvent<HTMLElement, Event>) => {
     setEditEventDialogState({ event: event, isOpen: true });
   };
 
-  const handleSelectSlot = ({ start, end }: SlotInfo) => {
+  const handleSelectSlot = (slotInfo: SlotInfo) => {
     const event: CalendarEvent = {
       id: uuidV4Generator(),
-      end,
-      start,
+      ...slotInfo,
       title: 'Event',
     };
     setEditEventDialogState({ event, isOpen: true });

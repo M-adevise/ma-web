@@ -15,13 +15,12 @@ export const EditEventDialog: FC<EditEventDialogProps> = ({ event, isOpen, close
     console.log(form.watch());
     close();
   };
-
   return (
     <Dialog open={isOpen} onClose={close}>
       <DialogTitle id='form-dialog-title'>Edit Event</DialogTitle>
       <DialogContent>
         <FormProvider {...form}>
-          <RHFInput name='title' autoFocus margin='dense' fullWidth label='Event Title' />
+          <RHFInput name='summary' multiline minRows={4} autoFocus margin='dense' fullWidth label='Event Title' />
           <RHFInput InputLabelProps={DateTimeLocalProps} name='start' autoFocus margin='dense' fullWidth label='Start Date' type='datetime-local' />
           <RHFInput InputLabelProps={DateTimeLocalProps} name='end' autoFocus margin='dense' fullWidth label='End Date' type='datetime-local' />
         </FormProvider>

@@ -1,4 +1,13 @@
 {
+  "inputs": {
+    "appointments": {
+      "summary": "Description",
+      "end": "Date de fin",
+      "start": "Date de début",
+      "organizer": "Organisateur",
+      "participant": "Participant"
+    }
+  },
   "pages": {
     "login": {
       "title": "Connectez-vous à votre compte",
