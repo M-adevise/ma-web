@@ -1,12 +1,13 @@
-import { CalendarMonth, Face, Group, Inbox, Lightbulb } from '@mui/icons-material';
+import { CalendarMonth as CalendarMonthIcon, Chat as ChatIcon, Face as FaceIcon, Group as GroupIcon, Inbox as InboxIcon, Lightbulb as LightbulbIcon } from '@mui/icons-material';
+import { ResourceProps } from '@refinedev/core';
 
-export const appResources = [
+export const appResources: ResourceProps[] = [
   {
     name: 'inbox',
     list: '/',
     meta: {
       label: 'Inbox',
-      icon: <Inbox />,
+      icon: <InboxIcon />,
     },
   },
   {
@@ -14,7 +15,7 @@ export const appResources = [
     list: '/appointments',
     meta: {
       label: 'Appointments',
-      icon: <CalendarMonth />,
+      icon: <CalendarMonthIcon />,
     },
   },
   {
@@ -22,7 +23,7 @@ export const appResources = [
     list: '/patients',
     meta: {
       label: 'Patients',
-      icon: <Group />,
+      icon: <GroupIcon />,
     },
   },
   {
@@ -30,7 +31,7 @@ export const appResources = [
     list: '/assistance',
     meta: {
       label: 'AI Assistances',
-      icon: <Lightbulb />,
+      icon: <LightbulbIcon />,
     },
   },
   {
@@ -38,7 +39,15 @@ export const appResources = [
     list: '/profile',
     meta: {
       label: 'Profile',
-      icon: <Face />,
+      icon: <FaceIcon />,
+    },
+  },
+  {
+    name: 'chat',
+    list: '/chat',
+    meta: {
+      label: 'Message direct',
+      icon: <ChatIcon />,
     },
   },
 ];
