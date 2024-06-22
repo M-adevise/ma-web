@@ -10,10 +10,13 @@ export const CallPage: FC = () => {
   const remoteUserRef = useRef<HTMLDivElement>(null);
   const { roomId = '' } = useParams();
 
-  const {} = useQuery({
+  useQuery({
     queryKey: ['call', roomId],
     queryFn: () => {
-      if (localUserRef.current) return zegoProvider.joinCall(roomId, localUserRef.current);
+      if (localUserRef.current && remoteUserRef.current) {
+        zegoProvider.joinCall(roomId, localUserRef.current);
+        zegoProvider.updateCall(roomId, remoteUserRef.current);
+      }
       return null;
     },
     enabled: !!localUserRef.current,
