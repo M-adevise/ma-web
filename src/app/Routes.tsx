@@ -7,13 +7,14 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
 import { CalendarPage } from '../pages/appointements';
 import { AssistancePage } from '../pages/assistance';
-import { AuthPage } from '../pages/auth';
 import { CallPage } from '../pages/call';
 import { Chat, ChatContactList } from '../pages/chat';
 import { MessageList } from '../pages/inbox';
 import { PatientList } from '../pages/patients';
 import { ProfilePage } from '../pages/profile';
 import { authenticatedContainer } from './styles';
+import { AuthPage } from '../pages/auth/AuthPage';
+import { LoginPage } from '../pages/auth/loginPage';
 
 export const AppRoute = () => {
   return (
@@ -53,20 +54,9 @@ export const AppRoute = () => {
         }>
         <Route
           path='/login'
-          element={
-            <AuthPage
-              providers={[
-                {
-                  name: 'SignIn With Google',
-                  icon: <Google width={5} />,
-                  label: 'SignIn With Google',
-                },
-              ]}
-              type='login'
-            />
-          }
+          element={<LoginPage />}
         />
-        <Route path='/register' element={<AuthPage type='register' />} />
+        <Route path='/register' element={<AuthPage />} />
       </Route>
 
       <Route
