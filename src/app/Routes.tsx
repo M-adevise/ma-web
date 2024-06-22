@@ -42,7 +42,7 @@ export const AppRoute = () => {
         <Route path='/appointments' element={<CalendarPage />} />
         <Route path='/assistance' element={<AssistancePage />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/call' element={<CallPage />} />
+        <Route path='/call/:roomId' element={<CallPage />} />
       </Route>
 
       <Route

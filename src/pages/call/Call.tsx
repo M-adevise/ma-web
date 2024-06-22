@@ -1,18 +1,23 @@
 import { Grid, Typography } from '@mui/material';
-import { FC, useEffect, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { RefineListView } from '../../components';
+import { zegoProvider } from '../../providers/zego-provider';
 
 export const CallPage: FC = () => {
   const localUserRef = useRef<HTMLDivElement>(null);
-  const remoteUseref = useRef<HTMLDivElement>(null);
+  const remoteUserRef = useRef<HTMLDivElement>(null);
+  const { roomId = '' } = useParams();
 
-  const call = () => {
-    // localUserRef.current && ZegoProvider.joinCall('room3', 'nyhasina', localUserRef.current, 'token');
-  };
-
-  useEffect(() => {
-    call();
-  }, []);
+  const {} = useQuery({
+    queryKey: ['call', roomId],
+    queryFn: () => {
+      if (localUserRef.current) return zegoProvider.joinCall(roomId, localUserRef.current);
+      return null;
+    },
+    enabled: !!localUserRef.current,
+  });
 
   return (
     <RefineListView>
@@ -31,7 +36,7 @@ export const CallPage: FC = () => {
             width: 500,
           }}>
           <Typography>Remote</Typography>
-          <div ref={remoteUseref}></div>
+          <div ref={remoteUserRef}></div>
         </Grid>
       </Grid>
     </RefineListView>
