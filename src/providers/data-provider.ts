@@ -60,9 +60,9 @@ export const dataProvider: DataProvider = {
     const data = await provider.crupdate(meta?.id, variables, meta);
     return { data };
   },
-  update: async function ({ resource, variables, meta }) {
+  update: async function ({ resource, variables, meta, id }) {
     const provider = getProvider(resource);
-    const data = await provider.crupdate(meta?.id, variables, meta);
+    const data = await provider.crupdate(id as string, variables, meta);
     return { data };
   },
   deleteOne: function <TData extends BaseRecord = BaseRecord, TVariables = {}>(params: DeleteOneParams<TVariables>): Promise<DeleteOneResponse<TData>> {

@@ -1,10 +1,10 @@
 import { CalendarEvent } from '../pages/appointements';
 import { activityApi } from './api';
-import { Appointment } from './gen';
 import { appointmentMapper } from './mapper';
+import { calendarEventMapper } from './mapper/calendar-event-mapper';
 import { ProviderType } from './types';
 
-export const appointmentProvider: ProviderType<CalendarEvent, Appointment> = {
+export const appointmentProvider: ProviderType<CalendarEvent, CalendarEvent> = {
   async getOneBy(params) {
     if (params.appointmentId) {
       const { data } = await activityApi().readAppointment(params.appointmentId);
@@ -23,8 +23,9 @@ export const appointmentProvider: ProviderType<CalendarEvent, Appointment> = {
     }
     throw new Error('appointmentProvider.getAllBy no id was provided');
   },
-  async crupdate(appointmentId, appointment) {
-    const { data } = await activityApi().crupdateAppointment(appointmentId, appointment);
+  async crupdate(appointmentId, calendarEvent) {
+    const mappedAppointment = calendarEventMapper.toAppointment(calendarEvent);
+    const { data } = await activityApi().crupdateAppointment(appointmentId, mappedAppointment);
     return appointmentMapper.toCalendarEvent(data || {});
   },
 };

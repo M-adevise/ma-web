@@ -1,4 +1,5 @@
 export * from './AutoComplete';
+export * from './Button';
 export * from './DotsLoading';
 export * from './GoogleMapsAutocomplete';
 export * from './RHFInput';

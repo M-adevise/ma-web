@@ -8,11 +8,11 @@ import { EditEventDialogProps } from './types';
 
 export const EditEventDrawer: FC<EditEventDialogProps> = ({ event, isOpen, close }) => {
   const form = useCalendarEventForm(event);
-  const {} = useUpdate();
+  const { mutate: editCalendarEvent } = useUpdate();
 
-  const handleSave = () => {
-    close();
-  };
+  const handleSave = form.handleSubmit(data => {
+    editCalendarEvent({ resource: 'appointments', values: data, id: event.id });
+  });
 
   return (
     <Drawer anchor='right' open={isOpen} onClose={close}>
