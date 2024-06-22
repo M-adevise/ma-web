@@ -1,9 +1,18 @@
 import { List } from '@mui/material';
-import { useEffect, useRef } from 'react';
+import { useList } from '@refinedev/core';
+import { FC, useEffect, useRef } from 'react';
+import { Message } from '../../providers';
+import { getCached } from '../../utils';
 import { ChatListItem } from './ChatListItem';
 
-export const ChatList = () => {
+interface ChatListProps {
+  channelId?: string;
+}
+
+export const ChatList: FC<ChatListProps> = ({ channelId }) => {
+  const userId = getCached.user().id;
   const listRef = useRef<HTMLUListElement>(null);
+  const { data: messages } = useList<Message>({ resource: 'messages', meta: { by: 'channelId', id: channelId }, queryOptions: { enabled: !!channelId, refetchInterval: 5000 } });
 
   const scrollToBottom = () => {
     if (listRef.current) {
@@ -17,18 +26,7 @@ export const ChatList = () => {
 
   return (
     <List ref={listRef} sx={{ height: '60vh', overflowY: 'scroll', padding: 1 }}>
-      <ChatListItem
-        isFromMe
-        message='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum qui dolorum voluptates dolores nemo ad dolor debitis sed deleniti repellat, magnam ipsa dolorem, ex doloribus reiciendis. Temporibus non aut obcaecati!'
-      />
-      <ChatListItem isFromMe message='This is my message to you.' />
-      <ChatListItem isFromMe={false} message='This is my message to you.' />
-      <ChatListItem isFromMe message='This is my message to you.' />
-      <ChatListItem isFromMe={false} message='This is my message to you.' />
-      <ChatListItem isFromMe message='This is my message to you.' />
-      <ChatListItem isFromMe={false} message='This is my message to you.' />
-      <ChatListItem isFromMe message='This is my message to you.' />
-      <ChatListItem isFromMe={false} message='This is my message to you.' />
+      {messages?.data && messages.data.map(message => <ChatListItem isFromMe={userId === message.senderId} message={message.content || ''} />)}
     </List>
   );
 };

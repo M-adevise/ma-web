@@ -30,7 +30,7 @@ export const Chat = () => {
       <Card>
         <CardHeader title='John doe' />
         <CardContent>
-          <ChatList />
+          <ChatList channelId={channel?.id} />
           <FormProvider {...chatForm}>
             <form onSubmit={handleSubmit}>
               <Stack mt={2} direction='row' width='100%'>
