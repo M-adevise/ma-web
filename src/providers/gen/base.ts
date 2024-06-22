@@ -18,7 +18,7 @@ import type { Configuration } from './configuration';
 import type { AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = 'https://ma-api-f3w5n4qb4a-uc.a.run.app'.replace(/\/+$/, '');
+export const BASE_PATH = 'http://localhost:8080'.replace(/\/+$/, '');
 
 /**
  *

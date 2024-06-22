@@ -2745,10 +2745,12 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     /**
      *
      * @summary Get list of doctors
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getDoctors: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+    getDoctors: async (firstName?: string, lastName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
       const localVarPath = `/doctors`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2760,6 +2762,14 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
       const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      if (firstName !== undefined) {
+        localVarQueryParameter['firstName'] = firstName;
+      }
+
+      if (lastName !== undefined) {
+        localVarQueryParameter['lastName'] = lastName;
+      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2805,10 +2815,12 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
      *
      * @summary Get patients of a specific doctor
      * @param {string} id
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPatientsByDoctorId: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+    getPatientsByDoctorId: async (id: string, firstName?: string, lastName?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
       assertParamExists('getPatientsByDoctorId', 'id', id);
       const localVarPath = `/doctors/{id}/patients`.replace(`{${'id'}}`, encodeURIComponent(String(id)));
@@ -2822,6 +2834,14 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
       const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      if (firstName !== undefined) {
+        localVarQueryParameter['firstName'] = firstName;
+      }
+
+      if (lastName !== undefined) {
+        localVarQueryParameter['lastName'] = lastName;
+      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2907,11 +2927,13 @@ export const UserApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary Get list of doctors
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getDoctors(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Doctor>>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctors(options);
+    async getDoctors(firstName?: string, lastName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Doctor>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getDoctors(firstName, lastName, options);
       const index = configuration?.serverIndex ?? 0;
       const operationBasePath = operationServerMap['UserApi.getDoctors']?.[index]?.url;
       return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -2933,11 +2955,18 @@ export const UserApiFp = function (configuration?: Configuration) {
      *
      * @summary Get patients of a specific doctor
      * @param {string} id
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getPatientsByDoctorId(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Patient>>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getPatientsByDoctorId(id, options);
+    async getPatientsByDoctorId(
+      id: string,
+      firstName?: string,
+      lastName?: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Patient>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPatientsByDoctorId(id, firstName, lastName, options);
       const index = configuration?.serverIndex ?? 0;
       const operationBasePath = operationServerMap['UserApi.getPatientsByDoctorId']?.[index]?.url;
       return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -2990,11 +3019,13 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     /**
      *
      * @summary Get list of doctors
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getDoctors(options?: any): AxiosPromise<Array<Doctor>> {
-      return localVarFp.getDoctors(options).then(request => request(axios, basePath));
+    getDoctors(firstName?: string, lastName?: string, options?: any): AxiosPromise<Array<Doctor>> {
+      return localVarFp.getDoctors(firstName, lastName, options).then(request => request(axios, basePath));
     },
     /**
      *
@@ -3010,11 +3041,13 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
      *
      * @summary Get patients of a specific doctor
      * @param {string} id
+     * @param {string} [firstName]
+     * @param {string} [lastName]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPatientsByDoctorId(id: string, options?: any): AxiosPromise<Array<Patient>> {
-      return localVarFp.getPatientsByDoctorId(id, options).then(request => request(axios, basePath));
+    getPatientsByDoctorId(id: string, firstName?: string, lastName?: string, options?: any): AxiosPromise<Array<Patient>> {
+      return localVarFp.getPatientsByDoctorId(id, firstName, lastName, options).then(request => request(axios, basePath));
     },
     /**
      *
@@ -3069,13 +3102,15 @@ export class UserApi extends BaseAPI {
   /**
    *
    * @summary Get list of doctors
+   * @param {string} [firstName]
+   * @param {string} [lastName]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public getDoctors(options?: RawAxiosRequestConfig) {
+  public getDoctors(firstName?: string, lastName?: string, options?: RawAxiosRequestConfig) {
     return UserApiFp(this.configuration)
-      .getDoctors(options)
+      .getDoctors(firstName, lastName, options)
       .then(request => request(this.axios, this.basePath));
   }
 
@@ -3097,13 +3132,15 @@ export class UserApi extends BaseAPI {
    *
    * @summary Get patients of a specific doctor
    * @param {string} id
+   * @param {string} [firstName]
+   * @param {string} [lastName]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UserApi
    */
-  public getPatientsByDoctorId(id: string, options?: RawAxiosRequestConfig) {
+  public getPatientsByDoctorId(id: string, firstName?: string, lastName?: string, options?: RawAxiosRequestConfig) {
     return UserApiFp(this.configuration)
-      .getPatientsByDoctorId(id, options)
+      .getPatientsByDoctorId(id, firstName, lastName, options)
       .then(request => request(this.axios, this.basePath));
   }
 
