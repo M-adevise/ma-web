@@ -4,16 +4,6 @@ import z from 'zod';
 import { CalendarEvent } from '../../pages/appointements';
 import { customDateValidator } from './utils';
 
-const invalidDatePattern = /Invalid Date/;
-
-const validateDate = (dateInString: string) => {
-  const dateInDate = new Date(dateInString);
-  if (invalidDatePattern.test(dateInDate.toString())) {
-    return false;
-  }
-  return true;
-};
-
 const calendarEventValidator = z.object({
   id: z.string(),
   start: customDateValidator(),
