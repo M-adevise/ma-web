@@ -18,7 +18,7 @@ import type { Configuration } from './configuration';
 import type { AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = 'http://localhost:8080'.replace(/\/+$/, '');
+export const BASE_PATH = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 /**
  *

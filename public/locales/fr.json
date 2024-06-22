@@ -438,7 +438,7 @@
   },
   "appointments": {
     "inputs": {
-      "summary": "Description",
+      "title": "Description",
       "end": "Date de fin",
       "start": "Date de début",
       "organizer": "Organisateur",

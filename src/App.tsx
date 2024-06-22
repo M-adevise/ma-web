@@ -7,7 +7,7 @@ import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from '@r
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoute, appResources } from './app';
-import { accessControlProvider, dataProvider, authProvider } from './providers';
+import { accessControlProvider, authProvider, dataProvider } from './providers';
 import { ThemeProvider } from './theme';
 
 const App: React.FC = () => {

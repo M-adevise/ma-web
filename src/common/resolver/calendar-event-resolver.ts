@@ -9,7 +9,9 @@ const calendarEventValidator = z.object({
   id: z.string(),
   start: customDateValidator(),
   end: customDateValidator(),
-  summary: z.string().min(4),
+  title: z.string().min(4),
+  organizer: z.custom(() => true),
+  participant: z.custom(data => !!data),
 });
 
 const calendarEventResolver = zodResolver(calendarEventValidator);
@@ -20,6 +22,7 @@ const defaultCalendarEventValue: CalendarEvent = {
   id: 'id',
   title: 'Event',
   organizer: getCached.user(),
+  participant: undefined,
 };
 
 export const useCalendarEventForm = (defaultValue?: CalendarEvent) =>

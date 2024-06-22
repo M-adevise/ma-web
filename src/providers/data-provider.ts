@@ -40,7 +40,7 @@ export const dataProvider: DataProvider = {
       params[meta.by] = meta.id;
     }
 
-    const data = await provider.getAllBy(params);
+    const data = await provider.getAllBy(params, filters);
     return {
       data,
       total: 0,
