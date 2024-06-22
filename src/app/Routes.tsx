@@ -1,4 +1,3 @@
-import { Google } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { Authenticated, ErrorComponent } from '@refinedev/core';
 import { ThemedLayoutV2 } from '@refinedev/mui';
@@ -7,14 +6,14 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header, Title } from '../components';
 import { CalendarPage } from '../pages/appointements';
 import { AssistancePage } from '../pages/assistance';
+import { AuthPage } from '../pages/auth/AuthPage';
+import { LoginPage } from '../pages/auth/LoginPage';
 import { CallPage } from '../pages/call';
 import { Chat, ChatContactList } from '../pages/chat';
 import { MessageList } from '../pages/inbox';
 import { PatientList } from '../pages/patients';
 import { ProfilePage } from '../pages/profile';
 import { authenticatedContainer } from './styles';
-import { AuthPage } from '../pages/auth/AuthPage';
-import { LoginPage } from '../pages/auth/loginPage';
 
 export const AppRoute = () => {
   return (
@@ -52,10 +51,7 @@ export const AppRoute = () => {
             <NavigateToResource resource='inbox' />
           </Authenticated>
         }>
-        <Route
-          path='/login'
-          element={<LoginPage />}
-        />
+        <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<AuthPage />} />
       </Route>
 

@@ -1,10 +1,10 @@
 import { AuthProvider } from '@refinedev/core';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { cache, clearCached, getCached } from '../utils';
-import { securityApi, userApi } from './api';
-import { Configuration } from './gen';
+import { securityApi } from './api';
+import { auth } from './firebase-conf';
 
 export const authProvider: AuthProvider & {
-  getConfig: () => Configuration;
   loginGoogle: () => void;
 } = {
   async check() {
@@ -45,6 +45,9 @@ export const authProvider: AuthProvider & {
   },
   async login({ email, password }) {
     try {
+      const { user: firebaseUser } = await signInWithEmailAndPassword(auth, email, password);
+      const firebaseToken = await firebaseUser.getIdToken();
+      cache.token(firebaseToken);
       const { data: user } = await securityApi().signIn();
       cache.user(user);
       return {
@@ -52,11 +55,13 @@ export const authProvider: AuthProvider & {
         redirectTo: '/',
       };
     } catch (err) {
+      console.log(err);
+
       return {
         success: false,
         error: {
-          name: 'LoginError',
-          message: (err as Error).message || 'Invalid username or password',
+          name: 'Erreur',
+          message: "Une erreur s'est produite.",
         },
       };
     }
@@ -68,12 +73,6 @@ export const authProvider: AuthProvider & {
       success: true,
       redirectTo: '/login',
     };
-  },
-  getConfig() {
-    const accessToken = getCached.token() || '';
-    const conf = new Configuration({ accessToken });
-    conf.baseOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
-    return conf;
   },
   async onError(error) {
     return { error };
@@ -95,8 +94,7 @@ export const authProvider: AuthProvider & {
   },
   async getIdentity(params) {
     try {
-      const { id } = getCached.user();
-      const { data: user } = await userApi().getUserById({ id });
+      const user = getCached.user();
       return user;
     } catch {
       localStorage.clear();

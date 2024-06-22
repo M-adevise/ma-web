@@ -21,7 +21,7 @@ export const RHFInput: FC<RHFInputProps> = ({ name, ...props }) => {
     <TextField
       {...props}
       {...register(name)}
-      label={translate(`${resource?.name}.inputs.${name}`)}
+      label={translate(`${resource?.name || 'noResource'}.inputs.${name}`)}
       error={!!error}
       helperText={(error && (error.message as string)) || ''}
       size='small'

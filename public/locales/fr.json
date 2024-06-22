@@ -452,5 +452,14 @@
     "inputs": {
       "content": "Message"
     }
+  },
+  "noResource": {
+    "inputs": {
+      "email": "Email",
+      "password": "Mot de passe"
+    }
+  },
+  "error": {
+    "Invalid email": "Email invalide"
   }
 }
