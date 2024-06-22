@@ -443,6 +443,9 @@
       "start": "Date de début",
       "organizer": "Organisateur",
       "participant": "Participant"
+    },
+    "title": {
+      "creationDialog": "Créer un rendez-vous"
     }
   },
   "chat": {

@@ -4,9 +4,12 @@ import { FormProvider } from 'react-hook-form';
 import { useCalendarEventForm } from '../../common/resolver';
 import { CrupdateEventForm } from './CrupdateEventForm';
 import { EditEventDialogProps } from './types';
+import { useUpdate } from '@refinedev/core';
 
 export const EditEventDrawer: FC<EditEventDialogProps> = ({ event, isOpen, close }) => {
   const form = useCalendarEventForm(event);
+  const { } = useUpdate()
+
   const handleSave = () => {
     console.log(form.watch());
     close();
