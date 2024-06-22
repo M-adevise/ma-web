@@ -10,7 +10,6 @@ export const CreateEventDialog: FC<EditEventDialogProps> = ({ event, isOpen, clo
   const form = useCalendarEventForm(event);
   const translate = useTranslate();
   const handleSave = () => {
-    console.log(form.watch());
     close();
   };
   return (

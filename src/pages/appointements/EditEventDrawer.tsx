@@ -1,17 +1,16 @@
 import { Button, Drawer, Stack, Typography } from '@mui/material';
+import { useUpdate } from '@refinedev/core';
 import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useCalendarEventForm } from '../../common/resolver';
 import { CrupdateEventForm } from './CrupdateEventForm';
 import { EditEventDialogProps } from './types';
-import { useUpdate } from '@refinedev/core';
 
 export const EditEventDrawer: FC<EditEventDialogProps> = ({ event, isOpen, close }) => {
   const form = useCalendarEventForm(event);
-  const { } = useUpdate()
+  const {} = useUpdate();
 
   const handleSave = () => {
-    console.log(form.watch());
     close();
   };
 

@@ -27,7 +27,7 @@ export const authProvider: AuthProvider & {
       };
     }
   },
-  async register({ email, password }) {
+  async register() {
     try {
       return {
         success: true,
@@ -55,8 +55,6 @@ export const authProvider: AuthProvider & {
         redirectTo: '/',
       };
     } catch (err) {
-      console.log(err);
-
       return {
         success: false,
         error: {

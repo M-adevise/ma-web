@@ -3,7 +3,6 @@ import { ActivityApi, CommunicationApi, Configuration, DepartmentApi, FileApi, S
 
 const getConfig = () => {
   const accessToken = getCached.token() || '';
-  console.log(accessToken);
   const conf = new Configuration({ accessToken });
   conf.baseOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
   return conf;
