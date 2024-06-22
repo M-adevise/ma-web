@@ -1,3 +1,4 @@
+import { useList } from '@refinedev/core';
 import moment from 'moment';
 import React, { FC, useState } from 'react';
 import { Calendar, SlotInfo, momentLocalizer } from 'react-big-calendar';
@@ -5,11 +6,13 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { v4 as uuidV4Generator } from 'uuid';
 import { RefineListView } from '../../components';
+import { getCached } from '../../utils';
 import { CreateEventDialog } from './CreateEventDialog';
 import { EditEventDrawer } from './EditEventDrawer';
 import { CalendarEvent, EditEventDialogState } from './types';
 
 export const CalendarPage: FC = () => {
+  const userId = getCached.user().id;
   const localizer = momentLocalizer(moment);
   const [{ event: currentCalendarEvent, isDialogOpen, isDrawerOpen }, setEditEventDialogState] = useState<EditEventDialogState>({
     event: null,
@@ -17,12 +20,7 @@ export const CalendarPage: FC = () => {
     isDrawerOpen: false,
   });
 
-  const event = {
-    id: 'f70b84ab-3af7-4463-9c2a-6e06db982f70',
-    start: new Date('2024-06-07T11:36'),
-    end: new Date('2024-06-04T11:36'),
-    title: 'This is a thing',
-  };
+  const { data: events } = useList<CalendarEvent>({ resource: 'appointments', meta: { by: 'doctorId', id: userId } });
 
   const handleToggleEditEventDialog = () => setEditEventDialogState(prevState => ({ ...prevState, isDialogOpen: !prevState.isDialogOpen }));
   const handleToggleEditEventDrawer = () => setEditEventDialogState(prevState => ({ ...prevState, isDrawerOpen: !prevState.isDrawerOpen }));
@@ -47,8 +45,7 @@ export const CalendarPage: FC = () => {
         onSelectEvent={handleSelectEvent}
         localizer={localizer}
         onSelectSlot={handleSelectSlot}
-        //TODO: put here all event from back end
-        events={[event]}
+        events={events?.data || []}
         startAccessor='start'
         endAccessor='end'
         style={{ height: 600, width: '100%' }}

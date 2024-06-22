@@ -1,2 +1,1 @@
-export * from './activity-mapper';
-export * from './vehicle-mapper';
+export * from './appointment-mapper';

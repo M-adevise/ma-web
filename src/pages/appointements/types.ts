@@ -1,8 +1,13 @@
+import { Doctor, Patient } from '../../providers';
+
 export interface CalendarEvent {
   id: string;
   title: string;
   start: Date;
   end: Date;
+  organizer?: Doctor;
+  participant?: Patient;
+  roomId?: string;
 }
 
 export interface EditEventDialogProps {
