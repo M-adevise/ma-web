@@ -45,6 +45,7 @@ export const appResources: ResourceProps[] = [
   {
     name: 'chat',
     list: '/chat',
+    show: '/chat/:contactId',
     meta: {
       label: 'Message direct',
       icon: <ChatIcon />,

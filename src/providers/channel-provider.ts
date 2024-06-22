@@ -1,14 +1,13 @@
+import { getCached } from '../utils';
 import { communicationApi } from './api';
 import { Channel } from './gen';
 import { ProviderType } from './types';
 
 export const channelProvider: ProviderType<Channel, Channel> = {
   async getAllBy(params) {
-    if (params.userId) {
-      const { data } = await communicationApi().getChannels(params.doctorId);
-      return data;
-    }
-    throw new Error('patientProvider.getAllBy no id was provided');
+    const userId = getCached.user().id;
+    const { data } = await communicationApi().getChannels(userId);
+    return data;
   },
   async crupdate(channelId, body) {
     const { data } = await communicationApi().crupdateChannel(channelId, body);

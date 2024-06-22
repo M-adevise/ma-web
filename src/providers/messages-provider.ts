@@ -1,12 +1,12 @@
+import { getCached } from '../utils';
 import { communicationApi } from './api';
 import { Message } from './gen';
 import { ProviderType } from './types';
 
 export const messageProvider: ProviderType<Message, Message> = {
-  async crupdate(messageId, message) {
-    //TODO: use userId from cache
-    const userId = '';
-    const { data } = await communicationApi().crupdateMessage(messageId, userId, message);
+  async crupdate(messageId, message, params) {
+    const userId = getCached.user().id;
+    const { data } = await communicationApi().crupdateMessage(params?.channelId, messageId, message);
     return data;
   },
   async getAllBy(params) {

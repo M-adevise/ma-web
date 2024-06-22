@@ -444,5 +444,10 @@
       "organizer": "Organisateur",
       "participant": "Participant"
     }
+  },
+  "chat": {
+    "inputs": {
+      "content": "Message"
+    }
   }
 }

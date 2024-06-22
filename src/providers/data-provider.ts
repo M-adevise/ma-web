@@ -39,6 +39,7 @@ export const dataProvider: DataProvider = {
     if (meta.by) {
       params[meta.by] = meta.id;
     }
+
     const data = await provider.getAllBy(params);
     return {
       data,
@@ -56,12 +57,12 @@ export const dataProvider: DataProvider = {
   },
   create: async function ({ resource, variables, meta }) {
     const provider = getProvider(resource);
-    const data = await provider.crupdate(meta?.id, variables);
+    const data = await provider.crupdate(meta?.id, variables, meta);
     return { data };
   },
   update: async function ({ resource, variables, meta }) {
     const provider = getProvider(resource);
-    const data = await provider.crupdate(meta?.id, variables);
+    const data = await provider.crupdate(meta?.id, variables, meta);
     return { data };
   },
   deleteOne: function <TData extends BaseRecord = BaseRecord, TVariables = {}>(params: DeleteOneParams<TVariables>): Promise<DeleteOneResponse<TData>> {
